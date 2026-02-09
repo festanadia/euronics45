@@ -1,0 +1,28 @@
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../variables';
+
+.swiper-pagination-ael_evidence{
+    bottom: 0px !important;
+
+    .swiper-pagination-bullet{
+        background-color: #C0C1C7 !important;
+      
+    }
+    .swiper-pagination-bullet-active{
+        background-color: $colorBlue !important;
+    }
+   
+ }
+
+
+.ael_evidence_carousel{
+    height: 100%;
+
+   
+  
+}
+
+
+

@@ -1,0 +1,70 @@
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../colors';
+.ael_gamification_spinner_save_avatar{
+    display: none;
+}
+.block_avatar{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    visibility: hidden;
+    .ael_gamifaiction_button_random{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+}
+.container-avatar{
+    max-width: 300px;
+    max-height: 300px;
+    width: 100%;
+    height: 100%;
+    padding: 14px;
+}
+
+.ael_gamification_avatar_elements {
+    width:100%;
+    height: 200px;
+
+  
+.ael_gamification_data_filter{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    }
+}
+
+.ael_gamification-filter{
+    visibility: hidden;
+    position: relative;
+
+    .swiper-button-prev, .swiper-button-next{
+        color: $primary;
+    }
+}
+
+
+.ael_gamification-filter-badge-container {
+    flex-wrap:wrap;
+    gap:10px;
+    .ael_gamification-filter-badge{
+        cursor: pointer;
+        background-color: #f5f8ff;
+        border-radius: 4px;
+        padding: 4px 8px 4px 8px;
+        font-size: 13px;
+
+        &.ael_gamification_selected{
+            background-color:$primary;
+            color: #fff;
+        }
+    }
+    
+}
+

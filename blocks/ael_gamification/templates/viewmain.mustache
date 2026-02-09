@@ -1,0 +1,36 @@
+
+<div>
+        <div class='row'>
+                <div class='col-12'>
+                        <h4 class='ael_gamification-title-view'>{{#str}} title_view, block_ael_gamification {{/str}}</h4>
+                </div>
+        </div>
+       
+
+        <div class="row">
+            <div class='col-lg-3 col-md-12 ' >
+                {{#userData}}
+                        {{> block_ael_gamification/cardavatar }}
+                {{/userData}}
+              
+            </div>
+            <div class='col-lg-6 col-md-12'>
+                    {{> block_ael_gamification/cardprogressbar }}
+            </div>
+            <div class='col-lg-3 col-md-12'>
+                {{#cardPoint}}
+                        {{> block_ael_gamification/carddata }}
+                {{/cardPoint}}
+            </div>
+        </div>
+
+        <div class="d-flex mt-5  justify-content-center">
+                {{> block_ael_gamification/tabs }}
+        </div>
+
+        <div  id='ael_view' class="d-flex flex-column w-100 align-items-center">
+
+                
+        </div>
+       
+</div>

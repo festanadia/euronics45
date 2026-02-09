@@ -1,0 +1,94 @@
+$progressBarColor:#F1C400;
+.ael_card_course{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width:  329px;
+    height: 370px;
+   cursor: pointer;
+
+    .ael_card_course_photo{
+        background-color: #ccc;
+        flex: 0.5;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        background-size:cover;
+        position: relative;
+        .ael_card_course_is_principal{
+            position: absolute;
+            background-color: #EA5455;
+            color:#fff;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 4px 11px 4px 11px;
+            top: 30px;
+            left: 26px;
+            border-radius: 50px;
+        }
+        .ael_card_course_pb_bar{
+
+            width: calc( 100% - 50px);
+            height: 8px;
+            background-color: #fff;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 12px;
+            left: 25px;
+            
+
+            .ael_card_course_pb_bar_load{
+                position: absolute;
+                background-color: $progressBarColor;
+                border-radius: 5px;
+                top: 0px;
+                width: 0%;
+                height: 100%;
+                transition: width 0.5s;
+            }
+        }
+    }
+
+    .ael_card_course_data{
+        flex: 0.5;
+        padding-left: 26px;
+        padding-right: 26px;
+        padding-top: 16px;
+        background-color: #fff;
+        position: relative;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+
+
+        .ael_card_course_data_category{
+            color: #AAAAAA;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+    
+        .ael_card_course_data_title{
+            margin-top: 13px;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 26px;
+    
+        }
+        .ael_card_course_data_time{
+            font-size: 14px;
+            color: #AAAAAA;
+            position: absolute;
+            bottom: 16px;
+            left: 26px;
+            
+
+            svg{
+                width: 12px;
+                height: 12px;
+                fill: #AAAAAA;
+                margin-right: 15px;
+            }
+        }
+    
+    }
+
+  
+}

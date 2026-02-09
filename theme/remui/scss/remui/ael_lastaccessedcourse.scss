@@ -1,0 +1,232 @@
+.d-flex.paging-bar-container.mb-3 {
+    height: 20px;
+}
+
+.ael-namecourse {
+padding-left: 10px;
+}
+.dashboard-card .course-info-container {
+padding: 0px !important;
+}
+.container {
+padding-left: 0px;
+}
+.dashboard-card {
+min-height:100px;
+}
+.block .block-header-wrapper .block-header {
+font-size: 34px!important;
+padding-left: 0px;
+}
+
+
+   .block_aelrecentlyaccessedcourses{
+        background-color: transparent;
+		font-size: 34px;
+		padding-left: 12px;
+        // #F7F7F7
+    }
+
+    .block_aelrecentlyaccessedcourses  h4{
+        height: 50px;
+        width: 945px;
+        color: #282B36;
+        font-size: 34px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        line-height: 50px;
+        font-family: "euronicsheavy" !important;
+    }
+
+    .block_aelrecentlyaccessedcourses div.card-text{
+        margin-top: -1% !important;
+    }
+
+    .ael-truncate{
+      width: 250px;
+      white-space: normal; 
+    }
+
+    div.ael-truncate .text-truncate{
+      display: inline-block;
+      vertical-align:middle;
+      width: 650px;
+      white-space: normal;
+    }
+
+    .ael-namecourse{
+        height: 36px;
+        width: 425px;
+        color: #282B36;
+        font-family: "euronicsheavy" !important;
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: -0.4px;
+        line-height: 26px;
+    }
+
+    .ael-image{
+        height: 180px !important;
+    }
+
+    .without-margin{
+        padding: 0px !important;
+    }
+    
+    .ael-box{
+        padding: 0px;
+        margin: 0px !important;
+        margin-right: 10px;
+    }
+
+    .shadow{
+        box-shadow: 0 8px 16px 0 rgba(169,194,209,0.1) !important;
+    }
+
+    .ael-par-hour{
+        display: inline;
+        text-align: right;
+        height: 17px;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 17px;
+        font-family: "euronicsheavy" !important;
+    }
+
+    .ael-category{
+        text-transform: uppercase;  
+        height: 23px;
+        width: 144px;
+        color: #918E9F;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: -0.26px;
+        line-height: 23px;
+    }
+    .ael-orario{
+        font-weight: bold;
+    }
+
+    .ael-box-info{
+        text-align: right;  
+        white-space: normal; 
+        background-color: white;
+        color: #918E9F; 
+        font-size: 13px;
+    }
+
+    .ael-padding-box-row{
+        padding-bottom: 10px;
+    }
+
+    .ael-padding-box{
+ 
+    }
+
+    @media screen and (max-width: 500px) {
+        .block_aelrecentlyaccessedcourses  h4{
+            font-size: 24px !important;
+            line-height: 35px;
+        }
+
+        div.ael-truncate .text-truncate{
+            display: inline-block;
+            vertical-align:middle;
+            width: 300px;
+            white-space: normal;
+        }
+        .dinamic_height_mobile{
+            height: 55vw;
+        }
+        .text-truncate-category{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 450px;
+        }
+        .ael-par-hour{
+            display: inline;
+            text-align: left;
+        }
+        .ael-box-info{
+            text-align: left;  
+            white-space: normal; 
+            background-color: white;
+            color: #918E9F; 
+            font-size: 13px;
+        }
+    }
+
+    @media screen and (max-width: 810px) and (min-width: 500px) {
+        div.ael-truncate .text-truncate{
+            display: inline-block;
+            vertical-align:middle;
+            width: 500px;
+            white-space: normal;
+        }
+        .dinamic_height_mobile{
+            height: 35vw;
+        }
+        .ael-par-hour{
+            display: inline;
+            text-align: left;
+        }
+        .ael-box-info{
+            text-align: left;  
+            white-space: normal; 
+            background-color: white;
+            color: #918E9F; 
+            font-size: 13px;
+        }
+    }
+        
+
+    @media screen and (max-width: 1175px) and (min-width: 1050px) {
+        .block_aelrecentlyaccessedcourses  h4{
+           font-size: 34px;
+            line-height: 35px;
+        }
+        .ael-par-hour{
+            display: inline;
+            text-align: right;
+        }
+        div.ael-truncate .text-truncate{
+            display: inline-block;
+            vertical-align:middle;
+            width: 250px;
+            white-space: normal;
+        }
+
+    }
+
+    @media screen and (max-width: 1600px) and (min-width: 900px) {
+        .ael-image{
+            height: 180px !important;
+        }
+        .ael-padding-box{
+
+        }
+        div.ael-truncate .text-truncate{
+            display: inline-block;
+            vertical-align:middle;
+            width: 650px;
+            white-space: normal;
+        }
+    }
+
+
+    @media screen and (min-width: 1600px) and (max-width: 3024px) {
+        .ael-image{
+             height: 185px !important;
+        }
+        .ael-padding-box{
+
+        }
+
+        div.ael-truncate .text-truncate{
+            display: inline-block;
+            vertical-align:middle;
+            width: 700px;
+            white-space: normal;
+        }
+    }

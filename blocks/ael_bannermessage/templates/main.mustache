@@ -1,0 +1,48 @@
+
+
+
+<div id="block_ael_bannermessage_{{uniqid}}" class="block-ael_bannermessage block-cards"  >
+    
+   <div class='ael_bannermessage-container-left'>
+
+      <h4 class="ael_bannermessage-title-card"> {{title}} </h4>
+        {{#desc}}
+           <div  class="ael_bannermessage-desc-card">{{{desc}}}</div>
+         {{/desc}}
+
+          {{#cta}}
+             <div class="ael_bannermessage-cta-card" data-url='{{url}}'>{{cta}}</div>
+           {{/cta}}
+
+           
+
+   </div> 
+
+  
+    <div class='ael_bannermessage-container-bkg' style="background-image: url('{{image}}') ">
+     
+    </div>
+  
+
+
+
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery'
+],
+function(
+    $
+) {
+    var root = $('#block_ael_bannermessage_{{uniqid}}');
+    var ctaButton = root.find('.ael_bannermessage-cta-card');
+    $(ctaButton).on('click',()=>{
+      location.href= $(ctaButton).attr('data-url');
+   
+    })
+   
+});
+{{/js}}

@@ -1,0 +1,32 @@
+<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column  align-items-center mb-5'>
+    <div class="ael_gamification_containerbdg d-flex flex-column  align-items-center w-100">
+            <div class="ael_gamification_bdg_img_container">
+
+                {{#enabled}}
+                     <div class="ael_gamification_bdg_img ael_gamification_bdg_enabled">
+                {{/enabled}}
+
+                {{^enabled}}
+                    <div class="ael_gamification_bdg_img ael_gamification_bdg_disabled">
+                {{/enabled}}
+
+                     {{{pathImage}}}   
+
+                </div>
+            </div>
+
+            <div  class="ael_gamification_bdg_title" >
+            {{name}}
+            </div>
+            <div class="ael_gamification_bdg_desc">
+            {{desc}}
+            </div>
+            {{#date}}
+            <div class="ael_gamification_bdg_date">
+            {{date}}
+            </div>
+            {{/date}}
+
+    </div>
+</div>
+

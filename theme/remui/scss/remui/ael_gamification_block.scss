@@ -1,0 +1,116 @@
+.block_ael_gamification{
+    background-color: transparent;
+
+
+    .ael_gamification-card{
+        
+        background-color:#fff;
+        box-shadow: $box-shadow-ael;
+    }
+
+    .ael_gamification-card-avatar{
+        background-color: transparent; 
+        box-shadow: none;
+
+    }
+
+    .ael_gamification-title-card{
+	padding-left:10px;
+        @include titleCard();
+        margin-bottom: 65px;
+    }
+
+    .ael_gamification_edit_icon{
+      
+        svg{
+           fill: $link-color;
+         
+        }
+
+
+    }
+}
+
+body#page-blocks-ael_gamification-view-view{
+    .card.card-body{
+        background-color: transparent;
+    }
+    .ael_gamification-card,.ael_gamification_pb_container{
+        
+        background-color:#fff;
+        box-shadow: $box-shadow-ael;
+    }
+
+    .ael_gamification-card-avatar{
+        background-color: transparent; 
+        box-shadow: none;
+
+    }
+
+    .ael_gamification-title-card{
+        @include titleCard()
+    }
+
+    .ael_gamification_pb_title{
+        h4{
+            font-weight: normal;
+            font-size: 18px;
+        }
+    }
+
+    .ael_gamification_pb_num{
+        h4{
+            font-weight: bold;
+            font-size: 24px;
+        } 
+    }
+
+    .ael_gamification_rk_title{
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 50px;
+    }
+
+    .ael_gamification-title-view{
+        font-weight: bold;
+        font-size: 44px;
+        margin-bottom: 65px;
+    }
+
+    .ael_gamification_edit_icon{
+      
+        svg{
+           fill: $link-color;
+         
+        }
+
+
+    }
+
+    
+
+
+}
+
+body#page-blocks-ael_gamification-view-avatar{
+    .card.card-body{
+        background-color: transparent;
+    } 
+
+    .block_avatar{
+        background-color:#fff;
+        box-shadow: $box-shadow-ael;
+    }
+    .block_filter{
+        background-color:#fff;
+        box-shadow: $box-shadow-ael;
+    }
+
+    .ael_gamification-title-view{
+        font-weight: bold;
+        font-size: 44px;
+        margin-bottom: 65px;
+    }
+}
+
+

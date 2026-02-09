@@ -1,0 +1,34 @@
+
+<div  id="card-ael_gamification-{{type}}"  class='ael_gamification-card w-100 d-flex  flex-column align-items-center  justify-content-center  p-5' data-type="{{type}}" data-link="{{link}}">
+    <div class='ael_gamification-icon-container'>
+        <img class="empty-placeholder-image-lg"
+            src="{{image}}"
+            alt=""/>
+    </div>
+    <p class='ael_gamification_label_card'><span  class="loader" data-region="loading-icon-container">{{> core/loading }}</span>
+        
+    </p>
+</div>
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+    var root = $('#card-ael_gamification-{{type}}');
+    var type = root.attr('data-type');
+    const link =  root.attr('data-link');
+    
+    $(root).on('click',()=>{
+        window.location.href = link;
+    })
+    
+
+    Main.cardInfo(root,type);
+});
+{{/js}}

@@ -1,0 +1,72 @@
+$text-color:#282B36;
+$link-color: #00b2ff; 
+$boldFont:'euronicsheavy';
+$regularFont:'euronicsregular';
+$box-shadow-ael:5px 4px 6px 0px rgba(0,0,0,0.19);
+
+
+$headerTitleSizeMobile:24px;
+$container-max-widths: (
+  sm: 606px,
+  md: 750px,
+  lg: 970px,
+  xl: 1170px,
+  xxl: 1310px
+);
+
+
+
+
+body {
+    font-family: $regularFont;
+    color: $text-color;  
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $text-color;
+    font-family: $boldFont;
+}
+
+
+
+#page #region-main {
+    padding: 0px;
+}
+
+.ael_card_course{
+   // box-shadow: $box-shadow-ael;
+}
+
+[class*='block_ael_']{
+    .card-text{
+        .footer{
+            display: none;
+        }
+    }
+    
+}
+
+.block_aelrecentlyaccessedcourses{
+    .card-text{
+        .footer{
+            display: none;
+        }
+    }
+}
+
+.block_aelchosenbyyou{
+    .card-text{
+        .footer{
+            display: none;
+        }
+    }
+}
+body#page-my-index {
+    #page-header{
+        display: none;
+    }
+}
+
+
+

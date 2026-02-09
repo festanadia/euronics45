@@ -1,0 +1,44 @@
+
+
+
+
+<div class="ael_gamification-filter ael_gamification-filter-clothes  w-100">
+   <div class="swiper ael_gamification_avatar_elements ael_gamification-swiper-clothes">
+      <div class="swiper-wrapper">
+         <!-- Slides -->
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BlazerShirt">   {{#str}} BlazerShirt, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BlazerSweater">   {{#str}} BlazerSweater, block_ael_gamification {{/str}} </div>
+          <div class="swiper-slide ael_gamification_data_filter" data-value="CollarSweater">   {{#str}} CollarSweater, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="GraphicShirt">   {{#str}} GraphicShirt, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Hoodie">   {{#str}} Hoodie, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Overall">   {{#str}} Overall, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="ShirtCrewNeck">   {{#str}} ShirtCrewNeck, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="ShirtScoopNeck">   {{#str}} ShirtScoopNeck, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="ShirtVNeck">   {{#str}} ShirtVNeck, block_ael_gamification {{/str}} </div>
+      
+       
+      </div>
+   </div>
+   <div class="swiper-button-prev swiper-button-prev-ael_gamification-swiper-clothes"></div>
+   <div class="swiper-button-next swiper-button-next-ael_gamification-swiper-clothes"></div>
+</div>
+
+
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/avatar'
+],
+function(
+    $,
+    Avatar
+) {
+
+    Avatar.initSlider('ael_gamification-swiper-clothes');
+});
+{{/js}}
+
+

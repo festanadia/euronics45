@@ -1,0 +1,56 @@
+
+.block_ael_training{
+    background-color: transparent;
+
+
+
+
+    .ael_training-title-card{
+        @include titleCard()
+        
+    }
+
+
+    .ael_training-all-link{
+        a{
+            @include linkViewAll()
+        }
+     
+        
+       }
+
+    .ael_card_course{
+        box-shadow: $box-shadow-ael;
+    }
+}
+
+body#page-blocks-ael_training-view-view{
+    .card.card-body{
+        background-color: transparent;
+    }
+
+    .ael_training-title-view{
+        @include titleCard();
+        margin-bottom: 65px;
+    }
+    .ael_card_course{
+        box-shadow: $box-shadow-ael;
+    }
+
+    
+
+
+}
+
+
+@include media-breakpoint-down(sm) { 
+
+
+    .ael_training-title-card{
+        font-size: $headerTitleSizeMobile !important;        
+    }
+    .ael_training-title-view{
+        font-size: $headerTitleSizeMobile !important;        
+    }
+    
+}

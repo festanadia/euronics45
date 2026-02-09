@@ -1,0 +1,46 @@
+
+<div>
+        <div class='row'>
+                <div class='col-md-9'>
+                        <h4 class='ael_training-title-view'>{{#str}} title_view, block_ael_training {{/str}}</h4>
+                </div>
+                  <div class='col-md-3 d-flex align-items-center'>
+                    {{> block_ael_training/components/progressbar }}
+                 </div>
+                
+        </div>
+       
+       <div id='block_ael_training_view'>
+        <div class='w-100 ael_training_container_filters_primary'> </div>
+        <div class='w-100 ael_training_container_filters_secondary'></div>
+
+        
+
+        <div class='row' id='ael_training-courses-view'>
+                <div class='d-flex w-100 justify-content-center align-items-center'>
+                        <div class="spinner-grow text-primary" role="status">
+                                 <span class="sr-only">Loading...</span>
+                         </div>
+                </div>
+               
+        </div>  
+        </div>
+       
+</div>
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_training/main'
+],
+function(
+    $,
+    Main
+) {
+    const root = $('#block_ael_training_view');
+    Main.init(root);
+});
+
+
+{{/js}}

@@ -1,0 +1,74 @@
+
+
+<!-- Slider main container -->
+<div class="swiper ael_links_carousel">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper ">
+    <!-- Slides -->
+                    {{#courses}}
+                 <div class="swiper-slide ">
+                         
+
+                        <div class='ael_links-container-data'  data-url='{{viewurl}}' style="background-image:url('{{courseimage}}')">
+
+                                    <div class='ael_links-title'>{{fullname}}</div>
+
+                        </div>
+                            
+
+                          
+                 </div>   
+                    {{/courses}} 
+               
+                   
+        
+
+  </div>
+   
+</div>
+ <div class="swiper-pagination swiper-pagination-ael_links"></div>
+  
+
+<script type="module">
+ import Swiper from 'https://unpkg.com/swiper@7/swiper-bundle.esm.browser.min.js'
+
+const swiper = new Swiper('.ael_links_carousel', {
+  loop: false,
+  slidesPerView:3,
+  spaceBetween: 40,
+  centeredSlides:false,
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+    },
+   
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+     
+    },
+   
+    970: {
+      slidesPerView: 2,
+      spaceBetween: 40,
+       
+    },
+    1170: {
+      slidesPerView: 3,
+      spaceBetween: 10,
+    
+    }
+   
+  },
+  pagination: {
+    el: '.swiper-pagination-ael_links',
+    type: 'bullets',
+    clickable:true,
+    dynamicBullets:false,
+    dynamicMainBullets:1
+      
+
+  },
+
+});
+</script>

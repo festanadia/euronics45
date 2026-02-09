@@ -1,0 +1,46 @@
+<div id="block-ael_links-{{uniqid}}" class="block_ael_links block-cards"  data-userid="{{userid}}">
+    <div class='row'>
+        <div class='col-md-12'>
+            <h4 class="ael_links-title-card"> {{title}}</h4>
+        </div>
+     
+    </div>  
+
+   
+
+    
+
+    <div class='w-100 ael_links_container_slider'>
+             <div class='d-flex w-100 justify-content-center align-items-center'>
+                        <div class="spinner-grow text-primary" role="status">
+                                 <span class="sr-only">Loading...</span>
+                         </div>
+            </div>
+    </div>  
+
+
+
+
+</div>
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_links/main'
+],
+function(
+    $,
+    Main
+) {
+    const root = $('#block-ael_links-{{uniqid}}');
+    const param = {
+        typeEnrol:"{{typeEnrol}}",
+        customfield:"{{customfield}}",
+        customfieldvalue:"{{customfieldvalue}}"
+    };
+            
+    Main.initCourses(root,param);
+});
+
+
+{{/js}}

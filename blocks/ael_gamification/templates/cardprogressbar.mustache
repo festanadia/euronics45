@@ -1,0 +1,35 @@
+<div id="card-ael_gamification-progress" class='ael_gamification_pb_container w-100 d-flex flex-column align-items-center justify-content-center  p-5'>
+
+        <div class="ael_gamification_pb_label d-flex w-100">
+            <div class="ael_gamification_pb_title">
+              <h4>{{#str}} progressbar_label, block_ael_gamification {{/str}}</h4>
+            </div>
+             <div class="ael_gamification_pb_num">
+           
+               <h4><span  class="loader" data-region="loading-icon-container">{{> core/loading }}</span></h4>
+            </div>
+        </div>
+        <div class="ael_gamification_pb_bar_container w-100">
+
+                <div class="ael_gamification_pb_bar_grey w-100">
+                    <div class="ael_gamification_pb_bar_load"></div>
+                </div>
+        </div>
+
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+    var root = $('#card-ael_gamification-progress');
+    Main.cardInfo(root,'PROGRESS');
+});
+{{/js}}

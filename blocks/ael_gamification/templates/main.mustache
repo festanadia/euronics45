@@ -1,0 +1,60 @@
+
+<div id="block-ael_gamification-{{uniqid}}" class="block-ael_gamification block-cards" 
+        data-userid="{{userid}}">
+        <h4 class="ael_gamification-title-card"> {{titleCard}}  </h4>
+    
+    <div class="container-fluid p-0">
+         <div class="row">
+            <div class='col-lg-3  col-sm-12'>
+            
+                {{#userData}}
+                        {{> block_ael_gamification/cardavatar }}
+                {{/userData}}
+              
+                
+            </div>
+
+            <div class='col-lg-3 col-sm-12'>
+           
+                     {{#cardPoint}}
+                         {{> block_ael_gamification/carddata }}
+                     {{/cardPoint}}
+            
+            </div>
+            <div class='col-lg-3  col-sm-12'>
+                 
+             {{#cardRanking}}
+                         {{> block_ael_gamification/carddata }}
+             {{/cardRanking}}
+              
+            </div>
+            
+            <div class='col-lg-3  col-sm-12'>
+             
+                {{#cardMedal}}
+                            {{> block_ael_gamification/carddata }}
+                {{/cardMedal}}
+            
+             </div>
+            </div>
+        </div>
+    
+
+</div>
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+    var root = $('#block-ael_gamification-{{uniqid}}');
+    var userid = root.attr('data-userid');
+ 
+    Main.init(userid, root);
+});
+{{/js}}

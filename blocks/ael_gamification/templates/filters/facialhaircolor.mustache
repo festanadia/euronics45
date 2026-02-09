@@ -1,0 +1,41 @@
+
+
+
+
+<div class="ael_gamification-filter ael_gamification-filter-facialhaircolor  w-100">
+   <div class="swiper ael_gamification_avatar_elements ael_gamification-swiper-facialhaircolor">
+      <div class="swiper-wrapper">
+         <!-- Slides -->
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Auburn">   {{#str}} Auburn, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Black">   {{#str}} Black, block_ael_gamification {{/str}} </div>
+          <div class="swiper-slide ael_gamification_data_filter" data-value="Blonde">   {{#str}} Blonde, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BlondeGolden">   {{#str}} BlondeGolden, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BrownDark">   {{#str}} BrownDark, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Blue">   {{#str}} Blue, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Platinum">   {{#str}} Platinum, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Red">   {{#str}} Red, block_ael_gamification {{/str}} </div>
+      
+       
+      </div>
+   </div>
+   <div class="swiper-button-prev swiper-button-prev-ael_gamification-swiper-facialhaircolor"></div>
+   <div class="swiper-button-next swiper-button-next-ael_gamification-swiper-facialhaircolor"></div>
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/avatar'
+],
+function(
+    $,
+    Avatar
+) {
+
+    Avatar.initSlider('ael_gamification-swiper-facialhaircolor');
+});
+{{/js}}
+
+

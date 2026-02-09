@@ -1,0 +1,60 @@
+<div class="layout-1 container-fluid p-0" style="font-family: euronicsregular">
+  <div class="container-flex">
+   	<div class="row">
+      <div class="col-12 col-md-12 col-lg-3 column right-column" style="padding-right: 0px">
+        <div class="inner-container border-none px-4 mb-4 col-lg-12 showmycourses d-none d-lg-block">
+        </div>
+        <a name="begin"></a>
+
+        {{> theme_remui/coursearchive_sec_categories}}
+
+      </div>
+   		<div class="col-12 col-md-12 col-lg-9 column left-column" style="background-color: #f5f8ff;">
+   		  {{> theme_remui/coursearchive_page_filters1}}
+        <div class="col-12 text-center">
+          <img id="loader_id_all" src="{{loading}}" />
+        </div>
+        <div class="course-cards0 course-cards row miaclasse">
+          <!-- Here we will render the cards from Javascript side. -->
+        </div>
+
+        {{> theme_remui/coursearchive_durata}}
+
+        {{> theme_remui/coursearchive_stato}}
+
+        {{> theme_remui/coursearchive_brand}}
+
+        {{> theme_remui/coursearchive_priority}}
+
+        <div class="w-100 text-center container_mostra_altro container_mostra_altro_default">
+                <a id="button_mostra_altro_link" href="#" class="mostra_altro">
+                        <span style="color: #FFFFFF !important">{{#str}} mostradipiu , theme_remui {{/str}}</span>
+                </a>
+        </div>
+
+
+        <div class="footer">
+        </div>
+   	  </div>
+    </div>
+  </div>
+</div>
+<style>
+.list-group-item {
+border: 0px !important;
+}
+.page-context-header {
+display:none !important;
+}
+#page-header {
+    display: none;
+}
+</style>
+{{#js}}
+require(['theme_remui/loader', 'theme_remui/coursecategorylayout1'], function(l, c){
+
+
+  c.init('{{{defaultcat}}}');
+});
+{{/js}}
+

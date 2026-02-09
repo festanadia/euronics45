@@ -1,0 +1,14 @@
+   <div class='w-100'>
+                <div class='ael_training_sedocondaryFilter'>
+                   {{#all}}
+                        <div class='ael_training_filter_secondary ael_training_filter_active' data-key='all'>
+                             {{#str}} all_filter , block_ael_training {{/str}}  ({{num}})
+                        </div>
+                    {{/all}}
+                  {{#filters}}
+                        <div class='ael_training_filter_secondary' data-key='{{coursecategory}}'>{{coursecategory}} ({{num}})</div>    
+                  {{/filters}}
+                          
+                        
+                </div>
+    </div> 

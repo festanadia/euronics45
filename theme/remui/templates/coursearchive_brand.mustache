@@ -1,0 +1,48 @@
+        <div class="course-cards-brand course-cards" style="display:none;">
+          {{#customfieldsBrand}}
+            <div class="single-item-brand row" id="{{{name_strip_space}}}">
+              {{#content}}
+              <div class="col-lg-4 col-md-6 col-sm-12">
+              <a href="{{courseurl}}" style="text-decoration: none; color: #ffffff">
+                <div class='ael_card_course_category  individual-course-brand  individual-course-brand_{{name_strip_space}}' id="ael_card_course_{{id}}" data-link='{{courseurl}}'>
+                    <div class='ael_card_course_photo' style="background-image:url('{{courseimage}}')">
+                        {{#isPrincipal}}
+                        <div class="ael_card_course_is_principal">{{#str}} isprincipalcourse, theme_remui {{/str}}</div>
+                        {{/isPrincipal}}
+
+                        {{#isConcluso}}
+                        <div class="ael_card_course_is_concluso_category">{{#str}}concluso, theme_remui{{/str}} <i class="fal fa-chevron-down"></i></div>
+                        {{/isConcluso}}
+                        
+                        <div class="ael_card_course_pb_bar">
+                            <div class="ael_card_course_pb_bar_load" style="width:{{progress}}%"></div>
+                        </div>
+                    </div>
+                    <div class='ael_card_course_data'>
+                        <div class='ael_card_course_data_category'>
+                            {{categoryname}}
+                        </div>
+                        <div class='ael_card_course_data_title' style="color: black">
+                            {{fullname}}
+                        </div>
+                        
+
+                        <div class='ael_card_course_data_time'>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg>  {{customfielddurata}}
+                        </div>
+                    </div>
+                  </div>
+                </a>
+                </div>
+              {{/content}}
+            </div>
+          {{/customfieldsBrand}}
+            <div class="w-100 text-center container_mostra_altro ">
+                    <a id="button_mostra_altro_brand" href="#" class="mostra_altro">
+                        <span style="color: #FFFFFF !important">{{#str}} mostradipiu , theme_remui {{/str}}</span>
+                    </a>
+            </div>
+   		</div>

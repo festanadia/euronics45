@@ -1,0 +1,16 @@
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../variables';
+.ael_training_carousel{
+    height: 430px;
+
+    .swiper-pagination-bullet{
+        background-color: #C0C1C7;
+      
+    }
+    .swiper-pagination-bullet-active{
+        background-color: $colorBlue;
+    }
+}
+

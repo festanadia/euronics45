@@ -1,0 +1,20 @@
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../variables';
+.ael_chosenbyyou_carousel{
+    height: auto;
+    padding-bottom: 54px;
+
+  .swiper-pagination_chosenbyyou_carousel{
+       bottom:4px;
+        .swiper-pagination-bullet{
+            background-color: #C0C1C7;
+        
+        }
+        .swiper-pagination-bullet-active{
+            background-color: $colorBlue;
+        }
+    }
+}
+

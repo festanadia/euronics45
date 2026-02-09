@@ -1,0 +1,37 @@
+@mixin linkViewAll() {
+    
+        color: #1A408C;
+        font-size: 15px;
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-family: $boldFont;
+    
+}
+
+@mixin titleCard() {
+    
+    font-weight: bold;
+    font-size: 34px;
+
+}
+
+.block-region:not([data-blockregion="side-pre"]) .block .edw-block-body {
+    background-color: transparent;
+    padding: 0px;
+    box-shadow: none;
+}
+
+.main-area-bg:not(.pagelayout-login) div[role="main"] {
+    background: transparent;
+    padding: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.p-5 {
+    padding: 2rem !important;
+}
+
+.userpicture {
+    border: 0px solid #ced4da;
+}

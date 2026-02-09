@@ -1,0 +1,47 @@
+
+
+
+
+<div class="ael_gamification-filter ael_gamification-filter-mouth  w-100">
+   <div class="swiper ael_gamification_avatar_elements ael_gamification-swiper-mouth">
+      <div class="swiper-wrapper">
+         <!-- Slides -->
+         
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Default">   {{#str}} Default, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Concerned">   {{#str}} Concerned, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Disbelief">   {{#str}} Disbelief, block_ael_gamification {{/str}} </div>
+          <div class="swiper-slide ael_gamification_data_filter" data-value="Eating">   {{#str}} Eating, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Grimace">   {{#str}} Grimace, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Sad">   {{#str}} Sad, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="ScreamOpen">   {{#str}} ScreamOpen, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Serious">   {{#str}} Serious, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Smile">   {{#str}} Smile, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Tongue">   {{#str}} Tongue, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Twinkle">   {{#str}} Twinkle, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Vomit">   {{#str}} Vomit, block_ael_gamification {{/str}} </div>
+
+
+       
+      </div>
+   </div>
+   <div class="swiper-button-prev swiper-button-prev-ael_gamification-swiper-mouth"></div>
+   <div class="swiper-button-next swiper-button-next-ael_gamification-swiper-mouth"></div>
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/avatar'
+],
+function(
+    $,
+    Avatar
+) {
+
+    Avatar.initSlider('ael_gamification-swiper-mouth');
+});
+{{/js}}
+
+

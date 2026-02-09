@@ -1,0 +1,35 @@
+<div class='ael_gamification_rk_conatiner w-100 d-flex flex-column'>
+        {{#users}}
+
+        {{#isUserSession}}
+               <div class="ael_gamification_rk_row ael_gamification_rk_user_session">
+        {{/isUserSession}}
+
+         {{^isUserSession}}
+               <div class="ael_gamification_rk_row">
+        {{/isUserSession}}
+            <div class="ael_gamification_rk_col_pos">
+            {{pos}}
+            </div>
+              <div class="ael_gamification_rk_col_avatar">
+                <div class="ael_gamification_rk_avatar" style="background-image:url('{{pathAvatar}}')">
+                </div>
+            </div>
+             <div class="ael_gamification_rk_col_data_user">
+                 <div class="ael_gamification_rk_fullname">{{fullname}}</div>
+                 <div class="ael_gamification_rk_institution">{{institution}} </div>
+                 <div class="ael_gamification_rk_institution">{{department}} </div>
+                 
+            </div>
+            <div class="ael_gamification_rk_col_points">
+            {{points}}
+            </div>
+        </div>
+        {{^isUserSession}}
+               <div class="ael_gamification_rk_divider"></div>
+        {{/isUserSession}}
+ 
+        {{/users}}
+          
+
+<div>

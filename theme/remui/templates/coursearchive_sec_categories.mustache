@@ -1,0 +1,102 @@
+<div class="inner-container col-lg-11 col-sm-11 section-categories" style="border: 0px !important; padding-right: 0px; padding-left: 0px; width: 100%;">
+	<div class="panel m-0">
+		<div class="panel-heading" style="padding-bottom: 8px;" id="defaultHeading_3" role="tab">
+			<a class="panel-title d-flex justify-content-between align-items-center p-0" data-toggle="collapse" href="#collapseDefault_3" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="collapseDefault_3">
+				<h4 class="m-0 font-header">{{#str}}statofilter, theme_remui {{/str}}</h4>
+				<!-- <i class="fa fa-angle-down rotate-icon"> -->
+				</i>
+			</a>
+		</div>
+		<div class="panel-collapse collapse show" id="collapseDefault_3" aria-labelledby="defaultHeading_3" ole="tabpanel" style="">
+			<div class="panel-body p-0">
+				<ul class="list-group" style="padding-left: 0px !important;">
+					{{#coursestatus}}
+						<li class="list-group-item p-0">
+							<a class="linkstato font-link" style="font-family: 'euronicsregular';" href="#begin" data-id="{{{name_strip_space}}}">{{{name}}}<span class="float-right">({{length}})</span></a>
+							</li>
+					{{/coursestatus}}
+					<input type="hidden" id="array_oggetto2" value="{{coursestatusjson}}" />
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div class="panel-heading" style="padding-bottom: 8px;" id="defaultHeading_5" role="tab">
+			<a class="panel-title d-flex justify-content-between align-items-center p-0" data-toggle="collapse" href="#collapseDefault_5" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="collapseDefault_5">
+				<h4 class="m-0 font-header">{{#str}}priorityfilter, theme_remui {{/str}}</h4>
+				<!-- <i class="fa fa-angle-down rotate-icon"> -->
+				</i>
+			</a>
+		</div>
+		<div class="panel-collapse collapse show" id="collapseDefault_5" aria-labelledby="defaultHeading_5" ole="tabpanel" style="">
+			<div class="panel-body p-0">
+				<ul class="list-group" style="padding-left: 0px !important;">
+					{{#prorityNormal}}
+						<li class="list-group-item p-0">
+							<a class="linkpriority font-link" style="font-family: 'euronicsregular';" href="#begin" data-id="{{{name_strip_space}}}">{{{name}}} <span class="float-right">({{length}})</span></a>
+							</li>
+					{{/prorityNormal}}
+					<input type="hidden" id="array_oggetto4" value="{{prorityjson}}" />
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div class="panel-heading" style="padding-bottom: 8px;" id="defaultHeading_1" role="tab">
+			<a class="panel-title d-flex justify-content-between align-items-center p-0" data-toggle="collapse" href="#collapseDefault_1" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="collapseDefault_1">
+				<h4 class="m-0 font-header">{{#str}}categoryfilter, theme_remui {{/str}}</h4>
+				<!-- <i class="fa fa-angle-down rotate-icon"> -->
+				</i>
+			</a>
+		</div>
+		<div class="panel-collapse collapse show" id="collapseDefault_1" aria-labelledby="defaultHeading_1" role="tabpanel" style="">
+			<div class="panel-body p-0">
+				<ul class="list-group" style="padding-left: 0px !important;">
+					{{#categories}}
+						<li class="list-group-item p-0">
+							<a class="font-link" style="font-family: 'euronicsregular';" href="#begin" category-filter-link data-id="{{id}}">{{{title}}} <span class="float-right">({{courses}})</span></a>
+							</li>
+					{{/categories}}
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div class="panel-heading" style="padding-bottom: 8px;" id="defaultHeading_4" role="tab">
+			<a class="panel-title d-flex justify-content-between align-items-center p-0" data-toggle="collapse" href="#collapseDefault_4" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="collapseDefault_4">
+				<h4 class="m-0 font-header">{{#str}}brandfilter, theme_remui {{/str}}</h4>
+				<!-- <i class="fa fa-angle-down rotate-icon"> -->
+				</i>
+			</a>
+		</div>
+		<div class="panel-collapse collapse show" id="collapseDefault_4" aria-labelledby="defaultHeading_4" ole="tabpanel" style="">
+			<div class="panel-body p-0">
+				<ul class="list-group" style="padding-left: 0px !important;">
+					{{#customfieldsBrand}}
+						<li class="list-group-item p-0">
+							<a class="linkbrand font-link" style="font-family: 'euronicsregular';" href="#begin" data-id="{{{name_strip_space}}}">{{{name}}} <span class="float-right">({{length}})</span></a>
+							</li>
+					{{/customfieldsBrand}}
+					<input type="hidden" id="array_oggetto3" value="{{customfieldsBrandjson}}" />
+				</ul>
+			</div>
+		</div>
+		<hr>
+		<div class="panel-heading" style="padding-bottom: 8px;" id="defaultHeading_2" role="tab">
+			<a class="panel-title d-flex justify-content-between align-items-center p-0" data-toggle="collapse" href="#collapseDefault_2" data-parent="#exampleAccordionDefault" aria-expanded="true" aria-controls="collapseDefault_2">
+				<h4 class="m-0 font-header">{{#str}}duratafilter, theme_remui {{/str}}</h4>
+				<!-- <i class="fa fa-angle-down rotate-icon"> -->
+				</i>
+			</a>
+		</div>
+		<div class="panel-collapse collapse show" id="collapseDefault_2" aria-labelledby="defaultHeading_2" ole="tabpanel" style="">
+			<div class="panel-body p-0">
+				<ul class="list-group" style="padding-left: 0px !important;">
+					{{#customfields}}
+						<li class="list-group-item p-0">
+							<a class="linkdurata font-link" style="font-family: 'euronicsregular';" href="#begin"  data-id="{{{name_strip_space}}}">{{{name}}} <span class="float-right">({{length}})</span></a>
+							</li>
+					{{/customfields}}
+					<input type="hidden" id="array_oggetto" value="{{customfieldsjson}}" />
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

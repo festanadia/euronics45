@@ -1,0 +1,44 @@
+<div class='ael_gamification_view_rackings w-100'>
+
+           <div class='ael_gamification_view_rackings_tabs_container'>
+                <div class='ael_gamification_view_rackings_tab' data-tab='TAB_LEFT' >
+                     {{#str}} rancking_tab_left, block_ael_gamification {{/str}}
+                </div>
+                 <div class='ael_gamification_view_rackings_tab' data-tab='TAB_CENTER' >
+                         {{#str}} rancking_tab_center, block_ael_gamification {{/str}}
+                </div>
+                  <div class='ael_gamification_view_rackings_tab' data-tab='TAB_RIGHT' >
+                          {{#str}} rancking_tab_right, block_ael_gamification {{/str}}
+                </div>
+           </div> 
+       
+     
+          <div class="row mt-5">
+            <div class="col-md-12 col-xl-6 mt-5" id='ranking_left'>
+                <div class="ael_gamification_rk_title"> {{#str}} rancking_left_title, block_ael_gamification {{/str}}<span  class="loader" data-region="loading-icon-container">{{> core/loading }}</span></div>
+                <span id='container_rancking'></span>
+            </div>
+            <div class="col-md-12 col-xl-6 mt-5" id='ranking_right'>
+                <div class="ael_gamification_rk_title">{{#str}} rancking_right_title, block_ael_gamification {{/str}} <span  class="loader" data-region="loading-icon-container">{{> core/loading }}</span></div>
+               <span id='container_rancking'></span>
+            </div>
+        </div>
+
+
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+
+    Main.initRanking()
+});
+{{/js}}

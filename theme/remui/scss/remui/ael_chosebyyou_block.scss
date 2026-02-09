@@ -1,0 +1,32 @@
+
+.block_ael_aelchosenbyyou {
+    background-color: transparent;
+
+
+
+
+    .ael_aelchosenbyyou-title-card{
+        @include titleCard()
+        
+    }
+
+    .ael_aelchosenbyyou-all-link{
+        a{
+            @include linkViewAll()
+        }
+        
+    }
+
+
+}
+
+
+
+@include media-breakpoint-down(sm) { 
+
+
+    .ael_aelchosenbyyou-title-card{
+        font-size: $headerTitleSizeMobile !important;        
+    }
+  
+}

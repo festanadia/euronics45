@@ -1,0 +1,27 @@
+<div class="block_ael_aelchosenbyyou">
+    <div class='row ael_aelchosenbyyou_container_title'>
+        <div class='col-8'>
+            <h4 class="ael_aelchosenbyyou-title-card"> {{#str}} aelmsgwelcome , block_aelchosenbyyou {{/str}}  </h4>
+        </div>
+        <div class='col-4 ael_aelchosenbyyou-all-link d-flex align-items-center  justify-content-end'>
+            <a href="{{config.wwwroot}}/course/index.php"> {{language.veditutti}}</a>
+        </div>
+    </div> 
+</div>
+   
+<div class="block_ael_aelchosenbyyou  {{nocoursecss}}">
+    <!-- Top content -->
+    <div class="w-100">
+        {{> block_aelchosenbyyou/components/carousel }}
+    </div>
+
+    <div class="w-100 text-center ael_aelchosenbyyou_link_container_button ">
+
+            <a href="{{config.wwwroot}}/course/index.php" class="ael_aelchosenbyyou_link_esplora_catalogo">
+                <span style="color: #FFFFFF !important">{{language.esplora_catalogo}}</span>
+            </a>
+    
+    </div>
+    
+</div>
+

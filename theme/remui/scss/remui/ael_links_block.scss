@@ -1,0 +1,27 @@
+.swiper.ael_links_carousel.swiper-initialized.swiper-horizontal.swiper-pointer-events {
+    margin-bottom: 0px;
+}
+.block_ael_links {
+    background-color: transparent;
+
+
+
+
+    .ael_links-title-card{
+        @include titleCard()
+        
+    }
+
+
+}
+
+
+
+@include media-breakpoint-down(sm) { 
+
+
+    .ael_links-title-card{
+        font-size: $headerTitleSizeMobile !important;        
+    }
+  
+}

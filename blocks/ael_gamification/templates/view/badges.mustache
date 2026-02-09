@@ -1,0 +1,50 @@
+<div class='ael_gamification_view_badges w-100 row' id="ael_gamification_view_badges">
+  
+    <div class='w-100 align-items-center d-flex'>
+        <div  class='ael_gamification_title_badges'>
+          <h2> {{#str}} badges_get, block_ael_gamification {{/str}} </h2>
+        </div>
+     
+    </div>
+    <div class='w-100 row ael_gamification_container-badges container-badges-get'>
+      <div class='mt-3 d-flex align-items-center justify-content-center w-100 '>
+        <div class="spinner-grow" role="status">
+              <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+      
+    </div>
+
+        <div class='w-100 align-items-center d-flex'>
+        <div  class='ael_gamification_title_badges'>
+          <h2> {{#str}} badges_noget, block_ael_gamification {{/str}} </h2>
+        </div>
+     
+    </div>
+    <div class='w-100 row ael_gamification_container-badges container-badges-noget'>
+      <div class='mt-3 d-flex align-items-center justify-content-center w-100 '>
+        <div class="spinner-grow" role="status">
+              <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+      
+    </div>
+
+</div>
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+    var root = $('#ael_gamification_view_badges');
+    
+
+    Main.initViewBadges(root);
+});
+{{/js}}

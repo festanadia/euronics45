@@ -1,0 +1,127 @@
+.height_card_nocourse{
+   height: 230px !important; 
+}
+
+.ael_aelchosenbyyou_container_title{
+    margin-bottom: 40px;
+    font-family: euronicsheavy !important;
+}
+
+.nocourse{
+    border-style: solid;
+    border-size: 1px !important;
+    padding-bottom: 35px;
+    border-color: #dcdfe6 !important;
+}
+
+.style_header{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.ael_smile_light{
+    width: 15%; 
+    margin: 30px
+}
+
+.block_aelchosenbyyou{
+   h4{
+        height: 50px;
+        width: 945px;
+        color: #282B36;
+        font-size: 44px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        line-height: 50px;
+        font-family: "euronicsheavy" !important;
+    } 
+}  
+
+.block_aelchosenbyyou.block.card{
+    background-color:  #f5f8ff;
+}
+
+.vedi_tutti {
+  height: 20px;
+  width: 79px;
+  color: #1A408C;
+  font-family: "euronicsheavy" !important;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: 55px;
+  text-decoration: underline;
+  margin-top: -45px;
+  text-transform: uppercase;
+}
+
+.vedi_tutti a:focus {
+  color: #1A408C;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.vedi_tutti a:active {
+  color: #1A408C;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.vedi_tutti a:link {
+  color: #1A408C;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+
+.principal_div_button{
+    width: 248.98px;
+    margin-top: 64px;
+    text-align: center;
+    padding-bottom: 20px ;
+    padding-top: 20px;
+}
+
+
+
+.ael_aelchosenbyyou_link_container_button{
+    margin-top: 65px;
+    
+    
+    .ael_aelchosenbyyou_link_esplora_catalogo{
+        width: 234.81px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-transform: uppercase;
+        background-color: #00b6ff;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0;
+    } 
+
+
+    .ael_aelchosenbyyou_link_esplora_catalogo:focus{
+        color: #FFFFFF !important;
+        text-decoration: none;
+        text-transform: uppercase;    
+    } 
+    .ael_aelchosenbyyou_link_esplora_catalogo:active{
+        color: #FFFFFF !important;
+        text-decoration: none;
+        text-transform: uppercase;  
+    } 
+    .ael_aelchosenbyyou_link_esplora_catalogo:link{
+        color: #FFFFFF !important; 
+        text-decoration: none;  
+        text-transform: uppercase;
+    } 
+}
+
+
+
+

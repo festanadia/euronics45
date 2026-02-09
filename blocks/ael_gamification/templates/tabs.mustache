@@ -1,0 +1,26 @@
+
+<div class="ael_gamification_tabs_container d-flex">
+        <div class="ael_gamification_tab" id='ael_tab1'>
+             {{#str}} tab_1, block_ael_gamification {{/str}}
+        </div> 
+         <div class="ael_gamification_tab" id='ael_tab2'>
+             {{#str}} tab_2, block_ael_gamification {{/str}}
+        </div>       
+</div>
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/main'
+],
+function(
+    $,
+    Main
+) {
+    const root = $('.ael_gamification_tabs_container');
+    Main.initTabsEvent(root);
+    
+});
+{{/js}}

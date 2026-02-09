@@ -1,0 +1,36 @@
+
+.block_ael_evidence{
+    background-color: transparent;
+
+
+
+
+    .ael_evidence-title-card{
+        @include titleCard()
+        
+    }
+
+
+    .ael_evidence-container-data{
+   
+        .ael_evidence-title{
+            font-weight: $boldFont;
+        }
+    }
+   
+
+
+}
+
+
+
+
+@include media-breakpoint-down(sm) { 
+
+
+    .ael_evidence-title-card{
+        font-size: $headerTitleSizeMobile !important;        
+    }
+  
+    
+}

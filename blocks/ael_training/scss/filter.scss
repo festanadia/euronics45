@@ -1,0 +1,51 @@
+@import '../variables';
+.ael_training_container_filters_primary{
+ margin-top: 65px;
+ margin-bottom:35px;
+}
+.ael_training_container_filters_secondary{
+    margin-bottom:72px;
+}
+
+.ael_training_firstFilter{
+    width: 100%;
+    max-width: 562px;
+    margin: 0px auto;
+    background-color: #fff;
+    padding: 9px 16px 9px  16px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    border-radius: 100px;
+    flex-wrap:wrap;
+    .ael_training_filter{
+        background-color: #F5F8FF;
+        padding: 3px 20px 3px  20px;
+        border-radius: 50px;
+        font-size: 15px;
+        cursor: pointer;
+        
+        &.ael_training_filter_active{
+            background-color: $colorBlue;
+            color: #fff;
+        }
+    }
+}
+
+
+.ael_training_sedocondaryFilter{
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    .ael_training_filter_secondary{
+        background-color: #fff;
+        padding: 3px  20px 3px 20px;
+        font-size: 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        &.ael_training_filter_active{
+            background-color: $colorBlue;
+            color: #fff;
+        }
+    }
+}

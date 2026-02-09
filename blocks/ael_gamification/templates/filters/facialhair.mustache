@@ -1,0 +1,43 @@
+
+
+
+
+<div class="ael_gamification-filter ael_gamification-filter-facialhair  w-100">
+   <div class="swiper ael_gamification_avatar_elements ael_gamification-swiper-facialhair">
+      <div class="swiper-wrapper">
+         <!-- Slides -->
+         <div class="swiper-slide ael_gamification_data_filter" data-value="Blank">   {{#str}} Blank, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BeardMedium">   {{#str}} BeardMedium, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BeardLight">   {{#str}} BeardLight, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="BeardMajestic">   {{#str}} BeardMajestic, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="MoustacheFancy">   {{#str}} MoustacheFancy, block_ael_gamification {{/str}} </div>
+         <div class="swiper-slide ael_gamification_data_filter" data-value="MoustacheMagnum">   {{#str}} MoustacheMagnum, block_ael_gamification {{/str}} </div>
+      
+       
+      </div>
+   </div>
+   <div class="swiper-button-prev swiper-button-prev-ael_gamification-swiper-facialhair"></div>
+   <div class="swiper-button-next swiper-button-next-ael_gamification-swiper-facialhair"></div>
+</div>
+
+
+
+
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/avatar'
+],
+function(
+    $,
+    Avatar
+) {
+
+    Avatar.initSlider('ael_gamification-swiper-facialhair');
+});
+{{/js}}
+
+

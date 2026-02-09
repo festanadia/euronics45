@@ -1,0 +1,396 @@
+@import '../colors';
+
+.ael_gamification-card{
+     
+    cursor: pointer;
+    height: 100%;
+}
+
+.ael_gamification-icon-container{
+    width: auto;
+    height: auto;
+}
+.ael_gamification-icon-container img{
+    width: 60px;
+    height: 60px;
+}
+.ael_gamification_label_card{
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.ael_gamification_label_card span{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ael_gamification_label_card_avatar_fullname{
+    margin-top: 16px;
+    margin-bottom: 0px;
+    font-size: 21px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.ael_gamification_label_card_avatar_company{
+    margin-top:0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.ael_gamification-avatar-container{
+    position: relative;
+    .ael_gamification_edit_icon{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        svg{
+            height: 18px;
+            width: 18px;
+         
+        }
+
+
+    }
+}
+
+.ael_gamification_pb_container{
+    height: 100%;
+}
+
+.ael_gamification_pb_title{
+    flex:0.5;
+
+}
+.ael_gamification_pb_num{
+    flex:0.5;
+    text-align: right;
+}
+.ael_gamification_pb_bar_container{
+    margin-top: 26px;
+}
+.ael_gamification_pb_bar_container{
+    margin-top: 26px;
+}
+
+.ael_gamification_pb_bar_grey{
+    position: relative;
+    height: 12px;
+    background-color: #F3F3F5;
+    border-radius: 11px;
+}
+
+.ael_gamification_pb_bar_load{
+    position: absolute;
+    background-color: $progressColor;
+    border-radius: 11px;
+    top: 0px;
+    width: 0px;
+    height: 100%;
+    transition: width 0.5s;
+}
+
+
+.ael_gamification_tabs_container{
+    width: auto;
+    background-color: #fff;
+    border-radius: 28px;
+    gap: 22px;
+    padding: 11px 15px 11px 15px;
+    margin-top: 80px;
+    margin-bottom: 43px;
+}
+
+.ael_gamification_tab{
+    background-color:#F5F8FF;
+    border-radius: 20px;
+    padding: 8px 18px 8px 18px;
+    font-size: 15px;
+    cursor: pointer;
+
+    
+}
+
+.ael_gamification_tab.selected_tab{
+    background-color:$primary;
+    color:#fff;
+}
+
+
+/** BADGES VIEW CSS **/
+.ael_gamification_containerbdg{
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.19);
+    padding: 22px 30px 43px 30px;
+    min-height: 100%;
+    position: relative;
+}
+
+.ael_gamification_view_badges{
+    text-align: center;
+    margin-top: 43px;
+
+    .ael_gamification_title_badges{
+        h2{
+              font-size: 32px;
+              font-weight: bold;
+        }
+    }
+    .ael_gamification_container-badges{
+        padding-top: 56px;
+        padding-bottom: 56px;
+
+    }
+}
+
+.ael_gamification_view_badges .loader .icon{
+    font-size: 44px;
+}
+
+
+
+
+
+.ael_gamification_bdg_disabled{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.ael_gamification_bdg_check{
+    position: absolute;
+    background: $badge;
+    width: 37px;
+    height: 37px;
+    border-radius: 100%;
+    bottom: -10px;
+    right: -6px;
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ael_gamification_bdg_check svg{
+    height: 24px;
+    width: 33px;
+    color: #fff;
+}
+
+
+
+.ael_gamification_bdg_img{
+    width: 103px;
+    height: 103px;
+    background: transparent;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit:cover
+    }
+   
+}
+
+.ael_gamification_bdg_title{
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+.ael_gamification_bdg_desc{
+    margin-top: 6px;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+}
+
+.ael_gamification_bdg_date{
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color:#AAAAAA;
+    position: absolute;
+    bottom: 8px;
+}
+
+
+/*** RANCKING VIEW CSS **/
+
+
+.ael_gamification_rk_conatiner{
+    background-color: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.19);
+ 
+}
+.ael_gamification_view_rackings_tabs_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 60px;
+    .ael_gamification_view_rackings_tab{
+
+        padding: 4px 21px 4px 21px;
+        background-color: #fff;
+        border-radius:30px;
+        font-size: 15px;
+        cursor: pointer;
+        &.selected_tab_racking{
+            background-color: $primary;
+            color: #fff;
+            cursor: default;
+        }
+    }
+}
+
+.ael_gamification_rk_title{
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.ael_gamification_rk_row.ael_gamification_rk_user_session{
+   background-color:  rgba(0 ,180, 255 , 0.20);
+   border-bottom: 4px solid $primary;
+}
+.ael_gamification_rk_row{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+
+
+.ael_gamification_rk_row .ael_gamification_rk_col_pos{
+    height: 100%;
+    font-size: 21px;
+    font-weight: bold;
+    width: 100px;
+    padding-left:19px
+}
+.ael_gamification_rk_row .ael_gamification_rk_col_avatar{
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ael_gamification_rk_row .ael_gamification_rk_col_avatar .ael_gamification_rk_avatar{
+    width: 54px;
+    height: 54px;
+    border-radius: 100%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+
+}
+
+.ael_gamification_rk_col_data_user{
+    display: flex;
+    flex-direction: column;
+    padding-left: 19px;
+    flex: 1;
+}
+
+.ael_gamification_rk_col_data_user .ael_gamification_rk_fullname{
+    font-weight: bold;
+    font-size: 20px;
+}   
+
+.ael_gamification_rk_col_data_user .ael_gamification_rk_institution{
+    font-size: 13px;
+    margin-top: 4px;
+}
+.ael_gamification_rk_col_points{
+    width: auto;
+    text-align: right;
+    color: $primary;
+    font-size: 21px;
+    font-weight: bold;
+}
+.ael_gamification_rk_divider{
+    width: 100%;
+    height: 2px;
+    background-color: #F3F3F5;
+    width: calc(100% - 80px);
+    margin: 0px auto;
+}
+
+
+
+
+
+#ael_view{
+    min-height: 200px;
+}
+
+
+
+
+
+@media (max-width: 575.98px) { 
+
+    .ael_gamification_rk_row .ael_gamification_rk_col_pos {
+        height: 100%;
+        font-size: 13px;
+        font-weight: 700;
+        width: 43px;
+        padding-left: 0px;
+    }
+    .ael_gamification_rk_row .ael_gamification_rk_col_avatar .ael_gamification_rk_avatar {
+        width: 38px;
+        height: 38px;
+    }
+    .ael_gamification_rk_col_data_user .ael_gamification_rk_institution {
+        font-size: 13px;
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 130px;
+    }
+    .ael_gamification_rk_col_data_user .ael_gamification_rk_fullname {
+        font-size: 13px;
+    }
+    .ael_gamification_rk_col_points {
+    
+        font-size: 12px;
+    
+    }
+    .ael_gamification_rk_title{
+        font-size: 18px;
+    }
+
+
+
+}
+
+.ael_gamification_nobadges{
+    p{
+        font-size: 20px;
+    }
+}
+@media (max-width: 782.00px) { 
+    .ael_gamification_view_rackings_tabs_container{
+        flex-direction:column;
+        
+    }
+
+}
+

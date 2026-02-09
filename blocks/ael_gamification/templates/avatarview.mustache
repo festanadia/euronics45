@@ -1,0 +1,146 @@
+<script>
+  window.avatarswiper =  {};
+    window.avatarslider =  [];
+    try{
+    window.avatardata =  JSON.parse('{{{data}}}'); 
+    }catch(e){
+        window.avatardata =  {
+                                typeTop:'',
+                                accessories:'',
+                                clothes:'',
+                                eyebrow:'',
+                                eyes:'',
+                                facialhair:'',
+                                facialhaircolor:'',
+                                haircolor:'',
+                                mouth:'',
+                                skin:''
+
+                            };
+    }
+
+</script>
+<div class='row'>
+            <div class='col-12'>
+                    <h4 class='ael_gamification-title-view'>{{#str}} title_view_avatar, block_ael_gamification {{/str}}</h4>
+            </div>
+</div>
+  
+<div class='row'>
+
+    <div class='block_avatar col-md-6 d-flex align-items-center justify-content-center mt-3' id='changeavatar'>
+    
+       <div class='container-avatar '>
+        <div class='d-flex align-items-center justify-content-center'>
+            <div class="spinner-border text-primary " role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+           
+       </div>
+         
+    </div>
+   <div class=' col-md-6 d-flex align-items-center justify-content-center flex-column mt-3' >
+        <div class='block_filter w-100 d-flex ael_gamification-filter-badge-container mb-5 p-3'>
+
+            <div class='ael_gamification-filter-badge' data-value='typeTop'>
+                 {{#str}} top, block_ael_gamification {{/str}}
+            </div>
+            <div class='ael_gamification-filter-badge' data-value='accessories'>
+                 {{#str}} accessories, block_ael_gamification {{/str}}
+            </div>
+            <div class='ael_gamification-filter-badge' data-value='haircolor'>
+                 {{#str}} haircolor, block_ael_gamification {{/str}}
+            </div>
+            <div class='ael_gamification-filter-badge' data-value='facialhair'>
+                 {{#str}} facialhair, block_ael_gamification {{/str}}
+            </div>
+            <div class='ael_gamification-filter-badge' data-value='facialhaircolor'>
+                 {{#str}} facialhaircolor, block_ael_gamification {{/str}}
+            </div>
+              <div class='ael_gamification-filter-badge' data-value='clothes'>
+                 {{#str}} clothes, block_ael_gamification {{/str}}
+            </div>
+           <div class='ael_gamification-filter-badge' data-value='eyes'>
+                 {{#str}} eyes, block_ael_gamification {{/str}}
+            </div>
+           <div class='ael_gamification-filter-badge' data-value='clothes'>
+                 {{#str}} clothes, block_ael_gamification {{/str}}
+            </div>
+           <div class='ael_gamification-filter-badge' data-value='eyebrow'>
+                 {{#str}} eyebrow, block_ael_gamification {{/str}}
+            </div>
+           <div class='ael_gamification-filter-badge' data-value='mouth'>
+                 {{#str}} mouth, block_ael_gamification {{/str}}
+            </div>
+           <div class='ael_gamification-filter-badge' data-value='skin'>
+                 {{#str}} skin, block_ael_gamification {{/str}}
+            </div>
+        </div>
+
+
+        <div class="w-100">
+            {{> block_ael_gamification/filters/typeTop }}
+            {{> block_ael_gamification/filters/accessories }}
+            {{> block_ael_gamification/filters/haircolor }}
+            {{> block_ael_gamification/filters/facialhair }}    
+            {{> block_ael_gamification/filters/facialhaircolor }}    
+            {{> block_ael_gamification/filters/clothes }}   
+            {{> block_ael_gamification/filters/eyes }}   
+            {{> block_ael_gamification/filters/eyebrow }}   
+            {{> block_ael_gamification/filters/mouth }} 
+            {{> block_ael_gamification/filters/skin }}   
+        </div>
+      
+  
+  
+
+   </div>
+
+        
+
+</div>
+
+<div class='text-center w-100 mt-5'>
+<span class='ael_gamification_spinner_save_avatar'>
+        <div class="spinner-border text-primary" role="status">
+             <span class="sr-only">Loading...</span>
+        </div>
+</span>
+   
+    <button type="button" class="btn btn-primary savebutton-avatar"  >   {{#str}} save_avatar, block_ael_gamification {{/str}}</button>
+</div>
+
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_gamification/avatar'
+],
+function(
+    $,
+    Avatar
+) {
+
+   
+
+    Avatar.initBadgeEvent();
+});
+{{/js}}
+
+
+
+
+   
+
+
+
+
+
+
+
+<script>!function (e) { function t(t) { for (var n, a, l = t[0], p = t[1], f = t[2], c = 0, s = []; c < l.length; c++)a = l[c], Object.prototype.hasOwnProperty.call(o, a) && o[a] && s.push(o[a][0]), o[a] = 0; for (n in p) Object.prototype.hasOwnProperty.call(p, n) && (e[n] = p[n]); for (i && i(t); s.length;)s.shift()(); return u.push.apply(u, f || []), r() } function r() { for (var e, t = 0; t < u.length; t++) { for (var r = u[t], n = !0, l = 1; l < r.length; l++) { var p = r[l]; 0 !== o[p] && (n = !1) } n && (u.splice(t--, 1), e = a(a.s = r[0])) } return e } var n = {}, o = { 1: 0 }, u = []; function a(t) { if (n[t]) return n[t].exports; var r = n[t] = { i: t, l: !1, exports: {} }; return e[t].call(r.exports, r, r.exports, a), r.l = !0, r.exports } a.m = e, a.c = n, a.d = function (e, t, r) { a.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r }) }, a.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, a.t = function (e, t) { if (1 & t && (e = a(e)), 8 & t) return e; if (4 & t && "object" == typeof e && e && e.__esModule) return e; var r = Object.create(null); if (a.r(r), Object.defineProperty(r, "default", { enumerable: !0, value: e }), 2 & t && "string" != typeof e) for (var n in e) a.d(r, n, function (t) { return e[t] }.bind(null, n)); return r }, a.n = function (e) { var t = e && e.__esModule ? function () { return e.default } : function () { return e }; return a.d(t, "a", t), t }, a.o = function (e, t) { return Object.prototype.hasOwnProperty.call(e, t) }, a.p = "/"; var l = this["webpackJsonpavatar-component"] = this["webpackJsonpavatar-component"] || [], p = l.push.bind(l); l.push = t, l = l.slice(); for (var f = 0; f < l.length; f++)t(l[f]); var i = p; r() }([])</script>
+<script src="{{config.wwwroot}}/blocks/ael_gamification/js/chunk.js"></script>
+<script src="{{config.wwwroot}}/blocks/ael_gamification/js/main.chunk.js"></script>

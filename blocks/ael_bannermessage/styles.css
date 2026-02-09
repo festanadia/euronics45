@@ -1,0 +1,100 @@
+
+.block-ael_bannermessage{
+    display: flex;
+    position: relative;
+}
+
+.block-ael_bannermessage .ael_bannermessage-title-card{
+
+    font-size: 44px;
+    color: #000;
+    margin-bottom: 25px;
+
+}
+
+.block-ael_bannermessage .ael_bannermessage-desc-card{
+
+    color: #000;
+    font-size: 15px;
+    margin-bottom: 25px;
+
+}
+
+.block-ael_bannermessage .ael_bannermessage-container-left{
+
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    min-height: 267px;
+    justify-content: center;
+    padding: 31px 50px 31px 50px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+
+}
+.block-ael_bannermessage  .ael_bannermessage-cta-card{
+
+    background-color: #00B5FF;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px 14px 5px 14px;
+    transition: all 0.5s;
+    cursor: pointer;
+    color:#fff;
+}
+
+.block-ael_bannermessage  .ael_bannermessage-cta-card:hover{
+    opacity: 0.5;
+}
+
+.block-ael_bannermessage .ael_bannermessage-container-bkg{
+
+    width: 450px;
+    min-height: 267px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+   
+}
+
+@media (max-width: 991.98px) { 
+
+    .block-ael_bannermessage .ael_bannermessage-container-bkg{
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        z-index: 0;
+        opacity: 0.5;
+        background-position: center;
+        background-size: cover;
+
+    }
+    .block-ael_bannermessage .ael_bannermessage-container-left{
+        padding: 15px 25px 15px 25px;
+    }
+
+    .block-ael_bannermessage .ael_bannermessage-title-card{
+        font-size: 22px;
+    
+    }
+ }
+
+
+
+
+/*.block-ael_bannermessage .ael_bannermessage-container-bkg {
+    width: 100%;
+}
+
+width: 100%;
+height: 100%;
+background-color: #ccc;
+position: absolute;
+top: 0px;
+z-index: 0;
+opacity: 0.5;
+*/

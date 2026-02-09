@@ -1,0 +1,71 @@
+$height:287px;
+.ael_evidence_container_slider{
+    background-color:transparent;
+    height: 330px;
+    background-size: 100% $height;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+    margin-top: 55px;
+
+
+    .ael_evidence-container-data{
+        background-color: rgba(26,64,140,0.8);
+        color: #fff;
+        height: $height;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 80px;
+        padding-right: 80px;
+        
+
+        .ael_evidence-category{
+            font-size: 12px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .ael_evidence-title{
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: bold;
+            a{
+                color: #fff !important;
+            }
+        }
+        .ael_evidence-desc{
+            font-size: 15px;
+        }
+    }
+
+    .nocourse_evidence_msg{
+        font-size: 23px;
+    }
+} 
+
+
+//MOBILE
+@media (max-width: 575.98px) { 
+
+    .ael_evidence_container_slider{
+        background-size: auto $height !important;
+
+          .ael_evidence-container-data{
+                padding-left: 40px !important;
+                padding-right: 40px !important;
+            }
+    }
+  
+}
+
+@media (max-width: 767.98px) { 
+    .ael_evidence_container_slider{
+        background-size: auto $height !important;
+
+          .ael_evidence-container-data{
+                padding-left: 40px !important;
+                padding-right: 40px !important;
+            }
+    }
+
+}

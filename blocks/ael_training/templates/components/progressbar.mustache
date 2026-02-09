@@ -1,0 +1,29 @@
+    
+    <div class="ael_training_pb_bar_container w-100">
+                <div class="ael_training_pb_bar w-100">
+                    <div class='ael_training_num_progress'>
+                       <span  class="loader" data-region="loading-icon-container">{{> core/loading }}</span>
+                    </div>
+                    <div class="ael_training_pb_bar_load"></div>
+                </div>
+    </div>
+
+
+
+
+{{#js}}
+require(
+[
+    'jquery',
+    'block_ael_training/main'
+],
+function(
+    $,
+    Main
+) {
+    const root = $('.ael_training_pb_bar');
+    Main.initProgressBar(root);
+});
+
+
+{{/js}}

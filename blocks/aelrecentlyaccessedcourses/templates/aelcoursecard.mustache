@@ -1,0 +1,88 @@
+<div class="card dashboard-card ael-box shadow" role="listitem"
+    data-region="course-content"
+    data-course-id="{{{id}}}" style="width:100%;">
+    <div class="container" style="margin-bottom: -15px;">
+        <div class="row">
+            <div class="col-lg-3 p-0">
+                <a href="{{viewurl}}" tabindex="-1">
+                    <div class="card-img dashboard-card-img ael-image" style='background-image: url("{{{courseimage}}}");'>
+                        <span class="sr-only">{{#str}}aria:courseimage, core_course{{/str}}</span>
+                    </div>
+                </a>
+                <div class="without-margin card-body pr-1 course-info-container" id="course-info-container-{{id}}-{{uniqid}}">
+                    <div class="d-flex align-items-start">
+                        <div class="w-100 text-truncate">
+                            {{^visible}}
+                                <div class="d-flex flex-wrap">
+                                    <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
+                                </div>
+                            {{/visible}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 pt-4 ael-padding-box dinamic_height_mobile">
+                <div class="text-muted muted d-flex mb-1 flex-wrap">
+                    <div class="row ael-padding-box-row" style="width:100%">
+                        <div class="col-md-8 text-truncate-category">
+                            <span class="ael-category">{{$coursecategory}}{{/coursecategory}}</span>
+                        </div>
+                        <div class="col-md-4 ael-box-info">
+                            <p class="ael-par-hour"><i class="far fa-clock"></i> <span class="ael-orario" id="orario"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ael-truncate">
+                    <a href="{{viewurl}}" class="aalink coursename mr-2">
+                        {{> core_course/favouriteicon }}
+                        <span class="sr-only">
+                                {{#str}}aria:coursename, core_course{{/str}}
+                            </span>
+                            <div class="ael-namecourse ael-truncate">{{$coursename}}{{/coursename}}<br /><br /></div>
+                        <div id="corso" data-courseid="{{id}}"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+
+require(
+[
+    'jquery',
+    'block_aelrecentlyaccessedcourses/main'
+],
+function(
+    $,
+    Main
+) {
+    root = $("#corso");
+    var courseid = root.attr('data-courseid');
+
+    $( document ).ready(function() {
+        Main.getLastAccessedCoursesWithCustomField(courseid)
+        .then(function(renderedCourses) {
+
+            allCoursesCustomField = renderedCourses;
+            index = -1;
+            for(i=0; i<allCoursesCustomField[0]['customfields'].length; i++){
+                if(allCoursesCustomField[0]['customfields'][i].shortname=="durata") {
+                    index = i;
+                    break;
+                }
+            }
+            if( index != -1 ) {
+                document.getElementById("orario").textContent = allCoursesCustomField[0]['customfields'][index]['value'];
+            }
+        })
+        .catch(Notification.exception);
+    });
+});
+</script>
+
+<!-- stile della pagina -->
+
