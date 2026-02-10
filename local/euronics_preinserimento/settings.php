@@ -64,6 +64,15 @@ if ($hassiteconfig) {
         PARAM_TEXT
     ));
 
+    // External database name for eur_utenti table.
+    $settings->add(new admin_setting_configtext(
+        'local_euronics_preinserimento/external_dbname',
+        get_string('setting_external_dbname', 'local_euronics_preinserimento'),
+        get_string('setting_external_dbname_desc', 'local_euronics_preinserimento'),
+        'exteuronics',
+        PARAM_ALPHANUMEXT
+    ));
+
     // Support email.
     $settings->add(new admin_setting_configtext(
         'local_euronics_preinserimento/support_email',

@@ -125,7 +125,6 @@ class insert_user_form extends \moodleform {
      * @return array Validation errors.
      */
     public function validation($data, $files) {
-        global $DB;
         $errors = parent::validation($data, $files);
 
         // Validate company selection for admin users.
@@ -142,11 +141,21 @@ class insert_user_form extends \moodleform {
                 'local_euronics_preinserimento');
         }
 
-        // Check fiscal code uniqueness (stored as username).
+        // Check fiscal code uniqueness on eur_utenti.
         if (empty($errors['fiscalcode'])) {
-            $username = strtolower($cf);
-            if ($DB->record_exists('user', ['username' => $username, 'deleted' => 0])) {
+            if (local_euronics_preinserimento_fiscalcode_exists($cf)) {
                 $errors['fiscalcode'] = get_string('error_fiscalcode_exists',
+                    'local_euronics_preinserimento');
+            }
+        }
+
+        // Check username uniqueness on eur_utenti.
+        if (empty($errors['firstname']) && empty($errors['lastname'])) {
+            $username = local_euronics_preinserimento_generate_username(
+                $data['firstname'], $data['lastname']
+            );
+            if (local_euronics_preinserimento_username_exists($username)) {
+                $errors['lastname'] = get_string('error_username_exists',
                     'local_euronics_preinserimento');
             }
         }

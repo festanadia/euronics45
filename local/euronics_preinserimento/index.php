@@ -23,8 +23,6 @@
  */
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot . '/user/lib.php');
-require_once($CFG->dirroot . '/lib/enrollib.php');
 
 require_login();
 
@@ -104,21 +102,12 @@ if ($data = $form->get_data()) {
 
         // Success message.
         $successdata = new stdClass();
-        $successdata->fullname = fullname($result->user);
-        $successdata->username = $result->user->username;
+        $successdata->fullname = strtoupper(trim($data->firstname)) . ' ' . strtoupper(trim($data->lastname));
+        $successdata->username = $result->username;
         echo $OUTPUT->notification(
             get_string('success_message', 'local_euronics_preinserimento', $successdata),
             \core\output\notification::NOTIFY_SUCCESS
         );
-
-        // Enrolled courses list.
-        if (!empty($result->enrolled_courses)) {
-            echo $OUTPUT->notification(
-                get_string('success_enrolled_courses', 'local_euronics_preinserimento',
-                    implode(', ', $result->enrolled_courses)),
-                \core\output\notification::NOTIFY_INFO
-            );
-        }
 
         // Reminders.
         echo html_writer::start_div('euronics-badge-info mt-3 mb-2');
@@ -145,7 +134,7 @@ if ($data = $form->get_data()) {
     } catch (moodle_exception $e) {
         echo $OUTPUT->header();
         $supportemail = get_config('local_euronics_preinserimento', 'support_email');
-        $errormsg = get_string('error_generic', 'local_euronics_preinserimento');
+        $errormsg = $e->getMessage();
         if (!empty($supportemail)) {
             $errormsg .= '<br>' . get_string('error_contact_support', 'local_euronics_preinserimento',
                 $supportemail);
@@ -174,101 +163,85 @@ echo $OUTPUT->footer();
 
 
 /**
- * Create a new Moodle user and enrol in the selected safety courses.
+ * Create a new user: INSERT into exteuronics.eur_utenti + INSERT into mdl_user.
  *
  * @param stdClass $data    Form data.
  * @param array    $company Company array with 'code' and 'name' keys.
- * @return stdClass Object with 'user' and 'enrolled_courses' properties.
+ * @return stdClass Object with 'username' (lowercase) property.
  * @throws moodle_exception On failure.
  */
 function local_euronics_preinserimento_create_user(stdClass $data, array $company): stdClass {
-    global $DB, $CFG;
+    global $DB;
 
-    // Build username from fiscal code (lowercase).
-    $username = strtolower(trim($data->fiscalcode));
+    $firstname   = strtoupper(trim($data->firstname));
+    $lastname    = strtoupper(trim($data->lastname));
+    $fiscalcode  = strtoupper(trim($data->fiscalcode));
+    $companycode = $company['code'];
+    $companyname = $company['name'];
 
-    // Check uniqueness again (race condition guard).
-    if ($DB->record_exists('user', ['username' => $username, 'deleted' => 0])) {
+    // Generate normalized username (uppercase).
+    $usernameUpper = local_euronics_preinserimento_generate_username($data->firstname, $data->lastname);
+    $usernameLower = strtolower($usernameUpper);
+
+    // Uniqueness checks on eur_utenti (race condition guard).
+    if (local_euronics_preinserimento_username_exists($usernameUpper)) {
+        throw new moodle_exception('error_username_exists', 'local_euronics_preinserimento');
+    }
+    if (local_euronics_preinserimento_fiscalcode_exists($fiscalcode)) {
         throw new moodle_exception('error_fiscalcode_exists', 'local_euronics_preinserimento');
     }
 
-    // Create the user record.
-    $newuser = new stdClass();
-    $newuser->username    = $username;
-    $newuser->auth        = 'manual';
-    $newuser->confirmed   = 1;
-    $newuser->mnethostid  = $CFG->mnet_localhost_id;
-    $newuser->firstname   = trim($data->firstname);
-    $newuser->lastname    = trim($data->lastname);
-    $newuser->email       = $username . '@placeholder.local';
-    $newuser->institution = $company['name'];
-    $newuser->timecreated = time();
-    $newuser->timemodified = time();
+    // Build course enrolment string ("1", "2", "12", or "").
+    $coursestring = local_euronics_preinserimento_build_course_string(
+        !empty($data->sic_spec),
+        !empty($data->sic_agg)
+    );
 
-    // Generate a random password (user will not log in directly with it).
-    $newuser->password = hash_internal_user_password(random_string(15));
+    $email = 'preinserimento@email.it';
+    $now   = userdate(time(), '%d/%m/%Y %H:%M');
 
-    $newuser->id = user_create_user($newuser, false, false);
+    $extdb = local_euronics_preinserimento_get_external_dbname();
 
-    // Store the company name in the custom profile field if configured.
-    $fieldshortname = get_config('local_euronics_preinserimento', 'company_field');
-    if (!empty($fieldshortname)) {
-        $fieldid = $DB->get_field('user_info_field', 'id', ['shortname' => $fieldshortname]);
-        if ($fieldid) {
-            $infodata = new stdClass();
-            $infodata->userid = $newuser->id;
-            $infodata->fieldid = $fieldid;
-            $infodata->data = $company['name'];
-            $DB->insert_record('user_info_data', $infodata);
-        }
-    }
+    // 1) INSERT into exteuronics.eur_utenti.
+    $sql1 = "INSERT INTO `{$extdb}`.`eur_utenti`
+             (`username`, `codicefiscale`, `nome`, `cognome`, `aziendasocia`,
+              `puntovendita`, `email`, `nazione`, `bitutente`, `stato`)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $DB->execute($sql1, [
+        $usernameUpper,  // username (MAIUSCOLO).
+        $fiscalcode,     // codicefiscale.
+        $firstname,      // nome.
+        $lastname,       // cognome.
+        $companycode,    // aziendasocia (es. S03).
+        'PDS',           // puntovendita.
+        $email,          // email.
+        $coursestring,    // nazione (stringa corsi: 1, 2, 12).
+        '00000000',      // bitutente.
+        'Active',        // stato.
+    ]);
 
-    // Enrol in selected courses.
-    $enrolled = [];
+    // 2) INSERT into mdl_user.
+    $moodleuser = new stdClass();
+    $moodleuser->auth         = 'db';
+    $moodleuser->confirmed    = 1;
+    $moodleuser->policyagreed = 0;
+    $moodleuser->deleted      = 0;
+    $moodleuser->suspended    = 0;
+    $moodleuser->mnethostid   = 1;
+    $moodleuser->username     = $usernameLower; // username (minuscolo).
+    $moodleuser->idnumber     = $fiscalcode;
+    $moodleuser->firstname    = $firstname;
+    $moodleuser->lastname     = $lastname;
+    $moodleuser->email        = $email;
+    $moodleuser->institution  = $companyname;
+    $moodleuser->department   = 'Personale di Sede';
+    $moodleuser->description  = 'utente preinserito il ' . $now;
+    $moodleuser->timecreated  = time();
+    $moodleuser->timemodified = time();
 
-    if (!empty($data->sic_spec)) {
-        $courseid = get_config('local_euronics_preinserimento', 'course_sic_spec');
-        if (!empty($courseid) && $DB->record_exists('course', ['id' => $courseid])) {
-            local_euronics_preinserimento_enrol_user($newuser->id, $courseid);
-            $course = $DB->get_record('course', ['id' => $courseid], 'fullname');
-            $enrolled[] = $course->fullname;
-        }
-    }
-
-    if (!empty($data->sic_agg)) {
-        $courseid = get_config('local_euronics_preinserimento', 'course_sic_agg');
-        if (!empty($courseid) && $DB->record_exists('course', ['id' => $courseid])) {
-            local_euronics_preinserimento_enrol_user($newuser->id, $courseid);
-            $course = $DB->get_record('course', ['id' => $courseid], 'fullname');
-            $enrolled[] = $course->fullname;
-        }
-    }
+    $DB->insert_record('user', $moodleuser);
 
     $result = new stdClass();
-    $result->user = $DB->get_record('user', ['id' => $newuser->id]);
-    $result->enrolled_courses = $enrolled;
+    $result->username = $usernameLower;
     return $result;
-}
-
-/**
- * Enrol a user in a course using the manual enrolment plugin.
- *
- * @param int $userid   The user ID.
- * @param int $courseid The course ID.
- */
-function local_euronics_preinserimento_enrol_user(int $userid, int $courseid): void {
-    global $DB;
-
-    $enrolinstance = $DB->get_record('enrol', [
-        'courseid' => $courseid,
-        'enrol' => 'manual',
-        'status' => ENROL_INSTANCE_ENABLED,
-    ], '*', IGNORE_MULTIPLE);
-
-    if (!$enrolinstance) {
-        return;
-    }
-
-    $enrolplugin = enrol_get_plugin('manual');
-    $enrolplugin->enrol_user($enrolinstance, $userid, $enrolinstance->roleid);
 }

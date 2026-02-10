@@ -54,6 +54,7 @@ $string['error_fiscalcode_exists'] = 'A user with this fiscal code already exist
 $string['error_firstname_required'] = 'First name is required.';
 $string['error_lastname_required'] = 'Last name is required.';
 $string['error_company_required'] = 'Please select a company.';
+$string['error_username_exists'] = 'A user with this first name and last name combination already exists.';
 
 // Success.
 $string['success_title'] = 'User created successfully';
@@ -81,5 +82,7 @@ $string['setting_auto_enrol_companies'] = 'Companies with automatic safety enrol
 $string['setting_auto_enrol_companies_desc'] = 'Comma-separated company codes (e.g. S03,S04,S09). Users from these companies will be automatically enrolled in safety courses.';
 $string['setting_support_email'] = 'Support email';
 $string['setting_support_email_desc'] = 'Support email address displayed in error messages.';
+$string['setting_external_dbname'] = 'External database name';
+$string['setting_external_dbname_desc'] = 'Name of the external MySQL database containing the eur_utenti table (e.g. exteuronics).';
 $string['setting_company_field'] = 'Company profile field';
 $string['setting_company_field_desc'] = 'Shortname of the custom profile field that stores the user\'s company. If empty, the standard "institution" field will be used.';

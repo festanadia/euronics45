@@ -144,6 +144,107 @@ function local_euronics_preinserimento_has_auto_enrol(string $companycode): bool
 }
 
 /**
+ * Get the external database name from settings.
+ *
+ * @return string
+ */
+function local_euronics_preinserimento_get_external_dbname(): string {
+    $dbname = get_config('local_euronics_preinserimento', 'external_dbname');
+    return !empty($dbname) ? $dbname : 'exteuronics';
+}
+
+/**
+ * Generate a normalized username from first name and last name.
+ *
+ * Format: FIRSTNAME.LASTNAME (uppercase), with spaces removed and
+ * accented characters transliterated to ASCII equivalents.
+ *
+ * @param string $firstname First name.
+ * @param string $lastname  Last name.
+ * @return string Normalized username in uppercase.
+ */
+function local_euronics_preinserimento_generate_username(string $firstname, string $lastname): string {
+    $first = strtoupper(trim($firstname));
+    $last  = strtoupper(trim($lastname));
+
+    // Remove spaces within name parts.
+    $first = str_replace(' ', '', $first);
+    $last  = str_replace(' ', '', $last);
+
+    $username = $first . '.' . $last;
+
+    // Transliterate accented characters to ASCII equivalents.
+    $translitmap = [
+        'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A',
+        'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
+        'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
+        'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O',
+        'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U',
+        'Ñ' => 'N', 'Ç' => 'C',
+        'à' => 'A', 'á' => 'A', 'â' => 'A', 'ã' => 'A', 'ä' => 'A', 'å' => 'A',
+        'è' => 'E', 'é' => 'E', 'ê' => 'E', 'ë' => 'E',
+        'ì' => 'I', 'í' => 'I', 'î' => 'I', 'ï' => 'I',
+        'ò' => 'O', 'ó' => 'O', 'ô' => 'O', 'õ' => 'O', 'ö' => 'O',
+        'ù' => 'U', 'ú' => 'U', 'û' => 'U', 'ü' => 'U',
+        'ñ' => 'N', 'ç' => 'C',
+    ];
+    $username = strtr($username, $translitmap);
+
+    // Remove any remaining non-ASCII or special characters (keep A-Z, 0-9, dot).
+    $username = preg_replace('/[^A-Z0-9.]/', '', $username);
+
+    return $username;
+}
+
+/**
+ * Build the course enrolment string based on checkbox selections.
+ *
+ * "1" = Sicurezza Specifica, "2" = Sicurezza Aggiornamento, "12" = both.
+ *
+ * @param bool $sicspec  Sicurezza Specifica selected.
+ * @param bool $sicagg   Sicurezza Aggiornamento selected.
+ * @return string The enrolment string.
+ */
+function local_euronics_preinserimento_build_course_string(bool $sicspec, bool $sicagg): string {
+    $result = '';
+    if ($sicspec) {
+        $result .= '1';
+    }
+    if ($sicagg) {
+        $result .= '2';
+    }
+    return $result;
+}
+
+/**
+ * Check if a username already exists in the external eur_utenti table.
+ *
+ * @param string $username Username in uppercase.
+ * @return bool
+ */
+function local_euronics_preinserimento_username_exists(string $username): bool {
+    global $DB;
+    $extdb = local_euronics_preinserimento_get_external_dbname();
+    $sql = "SELECT COUNT(*) AS cnt FROM `{$extdb}`.`eur_utenti` WHERE `username` = ?";
+    $result = $DB->get_record_sql($sql, [$username]);
+    return $result && $result->cnt > 0;
+}
+
+/**
+ * Check if a fiscal code already exists in the external eur_utenti table.
+ *
+ * @param string $fiscalcode Fiscal code in uppercase.
+ * @return bool
+ */
+function local_euronics_preinserimento_fiscalcode_exists(string $fiscalcode): bool {
+    global $DB;
+    $extdb = local_euronics_preinserimento_get_external_dbname();
+    $sql = "SELECT COUNT(*) AS cnt FROM `{$extdb}`.`eur_utenti` WHERE `codicefiscale` = ?";
+    $result = $DB->get_record_sql($sql, [$fiscalcode]);
+    return $result && $result->cnt > 0;
+}
+
+/**
  * Resolve the company for the current user.
  *
  * For admin users: returns null (they must select from the dropdown).

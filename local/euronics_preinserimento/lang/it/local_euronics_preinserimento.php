@@ -54,6 +54,7 @@ $string['error_fiscalcode_exists'] = 'Esiste già un utente con questo codice fi
 $string['error_firstname_required'] = 'Il campo Nome è obbligatorio.';
 $string['error_lastname_required'] = 'Il campo Cognome è obbligatorio.';
 $string['error_company_required'] = 'Selezionare un\'azienda.';
+$string['error_username_exists'] = 'Esiste già un utente con questa combinazione nome e cognome.';
 
 // Success.
 $string['success_title'] = 'Utente creato con successo';
@@ -81,5 +82,7 @@ $string['setting_auto_enrol_companies'] = 'Aziende con auto-iscrizione sicurezza
 $string['setting_auto_enrol_companies_desc'] = 'Codici azienda separati da virgola (es. S03,S04,S09). Per queste aziende l\'utente sarà automaticamente iscritto ai corsi di sicurezza.';
 $string['setting_support_email'] = 'Email supporto';
 $string['setting_support_email_desc'] = 'Indirizzo email di supporto da mostrare nei messaggi di errore.';
+$string['setting_external_dbname'] = 'Nome database esterno';
+$string['setting_external_dbname_desc'] = 'Nome del database MySQL esterno contenente la tabella eur_utenti (es. exteuronics).';
 $string['setting_company_field'] = 'Campo profilo azienda';
 $string['setting_company_field_desc'] = 'Shortname del campo profilo personalizzato che contiene l\'azienda dell\'utente. Se vuoto, verrà usato il campo standard "institution".';
