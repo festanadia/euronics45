@@ -1,0 +1,51 @@
+/**
+ * Euronics pre-registration plugin styles.
+ *
+ * @package    local_euronics_preinserimento
+ * @copyright  2026 Euronics
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* Company name label above the form. */
+.euronics-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 0.25rem;
+}
+
+/* Page heading / subtitle. */
+.euronics-subtitle {
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Informational badge (blue left border). */
+.euronics-badge-info {
+    background-color: #e7f0ff;
+    border-left: 4px solid #0050d8;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Euronics primary button: blue with uppercase. */
+.btn-euronics,
+.btn-euronics:link,
+.btn-euronics:visited {
+    background-color: #0050d8;
+    border-color: #0050d8;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.btn-euronics:hover,
+.btn-euronics:focus {
+    background-color: #003c9e;
+    border-color: #003c9e;
+    color: #fff;
+}
