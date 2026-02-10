@@ -73,8 +73,12 @@ $string['error_nopermission'] = 'You do not have permission to register users.';
 // Settings.
 $string['settings_heading'] = 'User Pre-Registration Settings';
 $string['settings_heading_desc'] = 'Configure partner companies and options for user pre-registration.';
+$string['setting_admin_users'] = 'Admin usernames';
+$string['setting_admin_users_desc'] = 'One username per line. These users will be able to select the company to operate for via a dropdown menu.';
 $string['setting_companies'] = 'Partner companies list';
 $string['setting_companies_desc'] = 'One company per line, format: CODE|NAME (e.g. S03|BRUNO SPA). The name must match the value in the HR user\'s profile field.';
+$string['setting_auto_enrol_companies'] = 'Companies with automatic safety enrolment';
+$string['setting_auto_enrol_companies_desc'] = 'Comma-separated company codes (e.g. S03,S04,S09). Users from these companies will be automatically enrolled in safety courses.';
 $string['setting_support_email'] = 'Support email';
 $string['setting_support_email_desc'] = 'Support email address displayed in error messages.';
 $string['setting_company_field'] = 'Company profile field';

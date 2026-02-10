@@ -24,9 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-/** @var string[] Admin usernames that can operate on behalf of any company. */
-define('LOCAL_EURONICS_PREINSERIMENTO_ADMIN_USERS', ['admin', 'admin.profeti', 'admin.euronics']);
-
 /**
  * Add navigation node to the navigation tree.
  *
@@ -87,13 +84,63 @@ function local_euronics_preinserimento_get_companies(): array {
 }
 
 /**
+ * Get the list of admin usernames from plugin settings.
+ *
+ * @return string[]
+ */
+function local_euronics_preinserimento_get_admin_users(): array {
+    $raw = get_config('local_euronics_preinserimento', 'admin_users');
+    if (empty($raw)) {
+        return [];
+    }
+    $users = [];
+    foreach (explode("\n", $raw) as $line) {
+        $line = trim($line);
+        if ($line !== '') {
+            $users[] = $line;
+        }
+    }
+    return $users;
+}
+
+/**
  * Check if the current user is an admin operator (can choose any company).
  *
  * @return bool
  */
 function local_euronics_preinserimento_is_admin_user(): bool {
     global $USER;
-    return in_array($USER->username, LOCAL_EURONICS_PREINSERIMENTO_ADMIN_USERS, true);
+    return in_array($USER->username, local_euronics_preinserimento_get_admin_users(), true);
+}
+
+/**
+ * Get the list of company codes that have automatic safety enrolment.
+ *
+ * @return string[]
+ */
+function local_euronics_preinserimento_get_auto_enrol_companies(): array {
+    $raw = get_config('local_euronics_preinserimento', 'auto_enrol_companies');
+    if (empty($raw)) {
+        return [];
+    }
+    $codes = [];
+    foreach (explode(',', $raw) as $code) {
+        $code = trim($code);
+        if ($code !== '') {
+            $codes[] = $code;
+        }
+    }
+    return $codes;
+}
+
+/**
+ * Check whether the given company code has automatic safety enrolment.
+ *
+ * @param string $companycode The company code (e.g. 'S03').
+ * @return bool
+ */
+function local_euronics_preinserimento_has_auto_enrol(string $companycode): bool {
+    return in_array($companycode, local_euronics_preinserimento_get_auto_enrol_companies(), true);
 }
 
 /**

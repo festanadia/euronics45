@@ -73,8 +73,12 @@ $string['error_nopermission'] = 'Non disponi dei permessi necessari per inserire
 // Settings.
 $string['settings_heading'] = 'Configurazione Inserimento Utenti';
 $string['settings_heading_desc'] = 'Configura le aziende socie e le opzioni per il pre-inserimento utenti.';
+$string['setting_admin_users'] = 'Username amministratori';
+$string['setting_admin_users_desc'] = 'Una username per riga. Questi utenti potranno selezionare l\'azienda per la quale operare tramite un menu a tendina.';
 $string['setting_companies'] = 'Elenco aziende socie';
 $string['setting_companies_desc'] = 'Una riga per azienda, formato: CODICE|NOME (es. S03|BRUNO SPA). Il nome deve corrispondere al valore nel campo profilo dell\'utente HR.';
+$string['setting_auto_enrol_companies'] = 'Aziende con auto-iscrizione sicurezza';
+$string['setting_auto_enrol_companies_desc'] = 'Codici azienda separati da virgola (es. S03,S04,S09). Per queste aziende l\'utente sarà automaticamente iscritto ai corsi di sicurezza.';
 $string['setting_support_email'] = 'Email supporto';
 $string['setting_support_email_desc'] = 'Indirizzo email di supporto da mostrare nei messaggi di errore.';
 $string['setting_company_field'] = 'Campo profilo azienda';
