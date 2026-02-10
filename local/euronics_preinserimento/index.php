@@ -37,35 +37,67 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('pagetitle', 'local_euronics_preinserimento'));
 $PAGE->set_heading(get_string('pagetitle', 'local_euronics_preinserimento'));
 
-// Determine HR user's company.
-$company = local_euronics_preinserimento_get_user_company($USER->id);
-if (empty($company)) {
-    $PAGE->set_heading(get_string('error_title', 'local_euronics_preinserimento'));
-    echo $OUTPUT->header();
-    echo $OUTPUT->notification(
-        get_string('error_no_company', 'local_euronics_preinserimento'),
-        \core\output\notification::NOTIFY_ERROR
-    );
-    echo $OUTPUT->footer();
-    die();
+$isadmin   = local_euronics_preinserimento_is_admin_user();
+$companies = local_euronics_preinserimento_get_companies();
+
+// Determine the company for this session.
+if ($isadmin) {
+    // Admin users select the company from a dropdown.
+    // Pre-selected company code may come from URL (after a successful insertion).
+    $preselectedcompany = optional_param('company', '', PARAM_ALPHANUMEXT);
+    $company = null; // Will be resolved from form data on submit.
+} else {
+    // Regular HR users: auto-detect company from profile.
+    $resolved = local_euronics_preinserimento_resolve_user_company();
+    if (empty($resolved)) {
+        // Company not found or not in the configured list.
+        echo $OUTPUT->header();
+        $supportemail = get_config('local_euronics_preinserimento', 'support_email');
+        $errormsg = get_string('error_no_company', 'local_euronics_preinserimento');
+        if (!empty($supportemail)) {
+            $errormsg .= '<br>' . get_string('error_contact_support', 'local_euronics_preinserimento',
+                $supportemail);
+        }
+        echo $OUTPUT->notification($errormsg, \core\output\notification::NOTIFY_ERROR);
+        echo $OUTPUT->footer();
+        die();
+    }
+    $company = $resolved;
 }
 
-// Create the form.
-$form = new \local_euronics_preinserimento\form\insert_user_form();
+// Build form with custom data.
+$formcustomdata = [
+    'is_admin'  => $isadmin,
+    'companies' => $companies,
+];
+$form = new \local_euronics_preinserimento\form\insert_user_form(null, $formcustomdata);
+
+// Pre-select company for admin users (from URL parameter after successful insertion).
+if ($isadmin && !empty($preselectedcompany)) {
+    $form->set_data(['company_code' => $preselectedcompany]);
+}
 
 if ($form->is_cancelled()) {
     redirect(new moodle_url('/'));
 }
 
 if ($data = $form->get_data()) {
-    // Process form submission.
+    // Resolve the company from form data.
+    if ($isadmin) {
+        $code = $data->company_code;
+        if (!isset($companies[$code])) {
+            throw new moodle_exception('error_company_required', 'local_euronics_preinserimento');
+        }
+        $company = ['code' => $code, 'name' => $companies[$code]];
+    }
+
     try {
         $result = local_euronics_preinserimento_create_user($data, $company);
 
         echo $OUTPUT->header();
 
         // Company label.
-        echo html_writer::tag('div', $company, ['class' => 'euronics-title']);
+        echo html_writer::tag('div', $company['name'], ['class' => 'euronics-title']);
         echo html_writer::tag('div',
             get_string('pagetitle', 'local_euronics_preinserimento'),
             ['class' => 'euronics-subtitle']);
@@ -97,8 +129,12 @@ if ($data = $form->get_data()) {
         echo get_string('success_reminder_schedule', 'local_euronics_preinserimento');
         echo html_writer::end_div();
 
-        // Link to insert another user.
-        $url = new moodle_url('/local/euronics_preinserimento/index.php');
+        // Link to insert another user (preserve company selection for admins).
+        $urlparams = [];
+        if ($isadmin) {
+            $urlparams['company'] = $company['code'];
+        }
+        $url = new moodle_url('/local/euronics_preinserimento/index.php', $urlparams);
         echo html_writer::link($url,
             get_string('success_insert_another', 'local_euronics_preinserimento'),
             ['class' => 'btn btn-euronics mt-2']);
@@ -111,7 +147,8 @@ if ($data = $form->get_data()) {
         $supportemail = get_config('local_euronics_preinserimento', 'support_email');
         $errormsg = get_string('error_generic', 'local_euronics_preinserimento');
         if (!empty($supportemail)) {
-            $errormsg .= ' (' . $supportemail . ')';
+            $errormsg .= '<br>' . get_string('error_contact_support', 'local_euronics_preinserimento',
+                $supportemail);
         }
         echo $OUTPUT->notification($errormsg, \core\output\notification::NOTIFY_ERROR);
         $form->display();
@@ -123,8 +160,10 @@ if ($data = $form->get_data()) {
 // Display the form.
 echo $OUTPUT->header();
 
-// Company label above the form.
-echo html_writer::tag('div', $company, ['class' => 'euronics-title']);
+if (!$isadmin) {
+    // Show auto-detected company label above the form.
+    echo html_writer::tag('div', $company['name'], ['class' => 'euronics-title']);
+}
 echo html_writer::tag('div',
     get_string('pagetitle', 'local_euronics_preinserimento'),
     ['class' => 'euronics-subtitle']);
@@ -137,12 +176,12 @@ echo $OUTPUT->footer();
 /**
  * Create a new Moodle user and enrol in the selected safety courses.
  *
- * @param stdClass $data  Form data.
- * @param string $company Company name for the new user.
+ * @param stdClass $data    Form data.
+ * @param array    $company Company array with 'code' and 'name' keys.
  * @return stdClass Object with 'user' and 'enrolled_courses' properties.
  * @throws moodle_exception On failure.
  */
-function local_euronics_preinserimento_create_user(stdClass $data, string $company): stdClass {
+function local_euronics_preinserimento_create_user(stdClass $data, array $company): stdClass {
     global $DB, $CFG;
 
     // Build username from fiscal code (lowercase).
@@ -162,7 +201,7 @@ function local_euronics_preinserimento_create_user(stdClass $data, string $compa
     $newuser->firstname   = trim($data->firstname);
     $newuser->lastname    = trim($data->lastname);
     $newuser->email       = $username . '@placeholder.local';
-    $newuser->institution = $company;
+    $newuser->institution = $company['name'];
     $newuser->timecreated = time();
     $newuser->timemodified = time();
 
@@ -171,7 +210,7 @@ function local_euronics_preinserimento_create_user(stdClass $data, string $compa
 
     $newuser->id = user_create_user($newuser, false, false);
 
-    // Store fiscal code in the company profile field if configured.
+    // Store the company name in the custom profile field if configured.
     $fieldshortname = get_config('local_euronics_preinserimento', 'company_field');
     if (!empty($fieldshortname)) {
         $fieldid = $DB->get_field('user_info_field', 'id', ['shortname' => $fieldshortname]);
@@ -179,7 +218,7 @@ function local_euronics_preinserimento_create_user(stdClass $data, string $compa
             $infodata = new stdClass();
             $infodata->userid = $newuser->id;
             $infodata->fieldid = $fieldid;
-            $infodata->data = $company;
+            $infodata->data = $company['name'];
             $DB->insert_record('user_info_data', $infodata);
         }
     }
@@ -198,16 +237,6 @@ function local_euronics_preinserimento_create_user(stdClass $data, string $compa
 
     if (!empty($data->sic_agg)) {
         $courseid = get_config('local_euronics_preinserimento', 'course_sic_agg');
-        if (!empty($courseid) && $DB->record_exists('course', ['id' => $courseid])) {
-            local_euronics_preinserimento_enrol_user($newuser->id, $courseid);
-            $course = $DB->get_record('course', ['id' => $courseid], 'fullname');
-            $enrolled[] = $course->fullname;
-        }
-    }
-
-    // Auto-enrol in General Safety if the company rule is active.
-    if (local_euronics_preinserimento_has_auto_enrol_sic_gen($company)) {
-        $courseid = get_config('local_euronics_preinserimento', 'course_sic_gen');
         if (!empty($courseid) && $DB->record_exists('course', ['id' => $courseid])) {
             local_euronics_preinserimento_enrol_user($newuser->id, $courseid);
             $course = $DB->get_record('course', ['id' => $courseid], 'fullname');

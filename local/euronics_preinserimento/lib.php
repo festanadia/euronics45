@@ -24,6 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/** @var string[] Admin usernames that can operate on behalf of any company. */
+define('LOCAL_EURONICS_PREINSERIMENTO_ADMIN_USERS', ['admin', 'admin.profeti', 'admin.euronics']);
+
 /**
  * Add navigation node to the navigation tree.
  *
@@ -54,15 +57,84 @@ function local_euronics_preinserimento_extend_navigation(global_navigation $navi
 }
 
 /**
- * Get the company name for the given user.
+ * Parse the configured partner companies list.
  *
- * Reads the custom profile field configured in plugin settings.
- * Falls back to the standard 'institution' field.
+ * Returns an associative array code => name, e.g. ['S03' => 'BRUNO SPA', ...].
+ *
+ * @return array<string, string>
+ */
+function local_euronics_preinserimento_get_companies(): array {
+    $raw = get_config('local_euronics_preinserimento', 'companies');
+    if (empty($raw)) {
+        return [];
+    }
+
+    $companies = [];
+    $lines = explode("\n", $raw);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || strpos($line, '|') === false) {
+            continue;
+        }
+        [$code, $name] = explode('|', $line, 2);
+        $code = trim($code);
+        $name = trim($name);
+        if ($code !== '' && $name !== '') {
+            $companies[$code] = $name;
+        }
+    }
+    return $companies;
+}
+
+/**
+ * Check if the current user is an admin operator (can choose any company).
+ *
+ * @return bool
+ */
+function local_euronics_preinserimento_is_admin_user(): bool {
+    global $USER;
+    return in_array($USER->username, LOCAL_EURONICS_PREINSERIMENTO_ADMIN_USERS, true);
+}
+
+/**
+ * Resolve the company for the current user.
+ *
+ * For admin users: returns null (they must select from the dropdown).
+ * For regular HR users: reads the profile field and matches it against
+ * the configured partner companies list.
+ *
+ * @return array{code: string, name: string}|null Matched company or null.
+ */
+function local_euronics_preinserimento_resolve_user_company(): ?array {
+    global $USER;
+
+    if (local_euronics_preinserimento_is_admin_user()) {
+        return null;
+    }
+
+    $companyvalue = local_euronics_preinserimento_get_user_field_value($USER->id);
+    if (empty($companyvalue)) {
+        return null;
+    }
+
+    // Match against the configured companies (by name).
+    $companies = local_euronics_preinserimento_get_companies();
+    foreach ($companies as $code => $name) {
+        if (strcasecmp($name, $companyvalue) === 0) {
+            return ['code' => $code, 'name' => $name];
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Get the company field value for a user (custom profile field or institution).
  *
  * @param int $userid The user ID.
- * @return string|null The company name or null if not found.
+ * @return string|null The raw field value.
  */
-function local_euronics_preinserimento_get_user_company(int $userid): ?string {
+function local_euronics_preinserimento_get_user_field_value(int $userid): ?string {
     global $DB;
 
     // Try the configured custom profile field first.
@@ -89,30 +161,4 @@ function local_euronics_preinserimento_get_user_company(int $userid): ?string {
     }
 
     return null;
-}
-
-/**
- * Check whether the company has automatic enrolment for General Safety.
- *
- * Checks if a self-enrolment method is active for the General Safety course.
- *
- * @param string $company The company name.
- * @return bool True if auto-enrolment is active.
- */
-function local_euronics_preinserimento_has_auto_enrol_sic_gen(string $company): bool {
-    global $DB;
-
-    $courseid = get_config('local_euronics_preinserimento', 'course_sic_gen');
-    if (empty($courseid)) {
-        return false;
-    }
-
-    // Check if the course has an active self-enrolment instance.
-    $enrolinstances = $DB->get_records('enrol', [
-        'courseid' => $courseid,
-        'enrol' => 'self',
-        'status' => ENROL_INSTANCE_ENABLED,
-    ]);
-
-    return !empty($enrolinstances);
 }

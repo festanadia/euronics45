@@ -30,6 +30,7 @@ $string['menuitem'] = 'Inserimento utenti';
 // Page.
 $string['pagetitle'] = 'Inserimento nuovo utente';
 $string['company_label'] = 'Azienda';
+$string['select_company'] = '-- Seleziona azienda --';
 
 // Form: sections.
 $string['section_anagrafici'] = 'Dati anagrafici';
@@ -52,6 +53,7 @@ $string['error_fiscalcode_invalid'] = 'Il codice fiscale deve contenere esattame
 $string['error_fiscalcode_exists'] = 'Esiste già un utente con questo codice fiscale.';
 $string['error_firstname_required'] = 'Il campo Nome è obbligatorio.';
 $string['error_lastname_required'] = 'Il campo Cognome è obbligatorio.';
+$string['error_company_required'] = 'Selezionare un\'azienda.';
 
 // Success.
 $string['success_title'] = 'Utente creato con successo';
@@ -63,20 +65,17 @@ $string['success_insert_another'] = 'Inserisci un altro utente';
 
 // Errors.
 $string['error_title'] = 'Errore durante la creazione';
-$string['error_generic'] = 'Si è verificato un errore durante la creazione dell\'utente. Contattare il supporto all\'indirizzo email indicato per la risoluzione.';
-$string['error_no_company'] = 'Non è possibile determinare l\'azienda di appartenenza. Contattare il supporto.';
+$string['error_generic'] = 'Si è verificato un errore durante la creazione dell\'utente.';
+$string['error_no_company'] = 'Non è possibile determinare l\'azienda di appartenenza. L\'azienda associata al tuo profilo non risulta tra i soci configurati.';
+$string['error_contact_support'] = 'Contattare il supporto all\'indirizzo: <strong>{$a}</strong>';
 $string['error_nopermission'] = 'Non disponi dei permessi necessari per inserire utenti.';
 
 // Settings.
 $string['settings_heading'] = 'Configurazione Inserimento Utenti';
-$string['settings_heading_desc'] = 'Configura i corsi di sicurezza e le opzioni per il pre-inserimento utenti.';
-$string['setting_course_sic_spec'] = 'ID Corso Sicurezza Specifica';
-$string['setting_course_sic_spec_desc'] = 'ID del corso Moodle per la Sicurezza Specifica.';
-$string['setting_course_sic_agg'] = 'ID Corso Sicurezza Aggiornamento';
-$string['setting_course_sic_agg_desc'] = 'ID del corso Moodle per la Sicurezza Aggiornamento.';
-$string['setting_course_sic_gen'] = 'ID Corso Sicurezza Generale';
-$string['setting_course_sic_gen_desc'] = 'ID del corso Moodle per la Sicurezza Generale (iscrizione automatica).';
+$string['settings_heading_desc'] = 'Configura le aziende socie e le opzioni per il pre-inserimento utenti.';
+$string['setting_companies'] = 'Elenco aziende socie';
+$string['setting_companies_desc'] = 'Una riga per azienda, formato: CODICE|NOME (es. S03|BRUNO SPA). Il nome deve corrispondere al valore nel campo profilo dell\'utente HR.';
 $string['setting_support_email'] = 'Email supporto';
 $string['setting_support_email_desc'] = 'Indirizzo email di supporto da mostrare nei messaggi di errore.';
 $string['setting_company_field'] = 'Campo profilo azienda';
-$string['setting_company_field_desc'] = 'Nome dello shortname del campo profilo personalizzato che contiene l\'azienda dell\'utente (es. "company").';
+$string['setting_company_field_desc'] = 'Shortname del campo profilo personalizzato che contiene l\'azienda dell\'utente. Se vuoto, verrà usato il campo standard "institution".';
