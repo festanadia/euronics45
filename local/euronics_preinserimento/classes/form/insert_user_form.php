@@ -30,6 +30,11 @@ require_once($CFG->libdir . '/formslib.php');
 
 /**
  * Form for HR users to pre-register new users.
+ *
+ * Custom data expected:
+ *  - 'is_admin'  (bool)   Whether the user is an admin operator.
+ *  - 'companies' (array)  code => name pairs for the company dropdown (admin only).
+ *  - 'company'   (string) Pre-selected company code (admin only, optional).
  */
 class insert_user_form extends \moodleform {
 
@@ -38,6 +43,28 @@ class insert_user_form extends \moodleform {
      */
     protected function definition() {
         $mform = $this->_form;
+        $customdata = $this->_customdata;
+
+        $isadmin   = !empty($customdata['is_admin']);
+        $companies = $customdata['companies'] ?? [];
+
+        // Admin users: company selector.
+        if ($isadmin) {
+            $options = ['' => get_string('select_company', 'local_euronics_preinserimento')];
+            foreach ($companies as $code => $name) {
+                $options[$code] = $name;
+            }
+            $mform->addElement('select', 'company_code',
+                get_string('company_label', 'local_euronics_preinserimento'),
+                $options);
+            $mform->addRule('company_code',
+                get_string('error_company_required', 'local_euronics_preinserimento'),
+                'required', null, 'client');
+            // Disallow the empty placeholder.
+            $mform->addRule('company_code',
+                get_string('error_company_required', 'local_euronics_preinserimento'),
+                'nonzero', null, 'client');
+        }
 
         // Section: personal data.
         $mform->addElement('header', 'header_anagrafici',
@@ -98,8 +125,14 @@ class insert_user_form extends \moodleform {
      * @return array Validation errors.
      */
     public function validation($data, $files) {
-        global $DB;
         $errors = parent::validation($data, $files);
+
+        // Validate company selection for admin users.
+        $isadmin = !empty($this->_customdata['is_admin']);
+        if ($isadmin && empty($data['company_code'])) {
+            $errors['company_code'] = get_string('error_company_required',
+                'local_euronics_preinserimento');
+        }
 
         // Validate fiscal code format: exactly 16 alphanumeric characters.
         $cf = strtoupper(trim($data['fiscalcode']));
@@ -108,11 +141,21 @@ class insert_user_form extends \moodleform {
                 'local_euronics_preinserimento');
         }
 
-        // Check fiscal code uniqueness (stored as username).
+        // Check fiscal code uniqueness on eur_utenti.
         if (empty($errors['fiscalcode'])) {
-            $username = strtolower($cf);
-            if ($DB->record_exists('user', ['username' => $username, 'deleted' => 0])) {
+            if (local_euronics_preinserimento_fiscalcode_exists($cf)) {
                 $errors['fiscalcode'] = get_string('error_fiscalcode_exists',
+                    'local_euronics_preinserimento');
+            }
+        }
+
+        // Check username uniqueness on eur_utenti.
+        if (empty($errors['firstname']) && empty($errors['lastname'])) {
+            $username = local_euronics_preinserimento_generate_username(
+                $data['firstname'], $data['lastname']
+            );
+            if (local_euronics_preinserimento_username_exists($username)) {
+                $errors['lastname'] = get_string('error_username_exists',
                     'local_euronics_preinserimento');
             }
         }
