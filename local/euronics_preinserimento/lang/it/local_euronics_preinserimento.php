@@ -45,7 +45,7 @@ $string['course_sic_spec'] = 'Sicurezza Specifica';
 $string['course_sic_spec_help'] = 'Seleziona se l\'utente deve svolgere il corso di sicurezza specifica.';
 $string['course_sic_agg'] = 'Sicurezza Aggiornamento';
 $string['course_sic_agg_help'] = 'Seleziona se l\'utente deve svolgere il corso di aggiornamento.';
-$string['course_sic_gen_info'] = 'L\'utente sarà automaticamente iscritto a <strong>Sicurezza Generale</strong>, se previsto per l\'azienda.';
+$string['course_sic_gen_info'] = 'L\'utente sarà automaticamente iscritto a <strong>Sicurezza Generale</strong>';
 $string['submit'] = 'Inserisci';
 
 // Validation.
