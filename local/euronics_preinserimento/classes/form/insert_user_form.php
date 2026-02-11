@@ -32,9 +32,10 @@ require_once($CFG->libdir . '/formslib.php');
  * Form for HR users to pre-register new users.
  *
  * Custom data expected:
- *  - 'is_admin'  (bool)   Whether the user is an admin operator.
- *  - 'companies' (array)  code => name pairs for the company dropdown (admin only).
- *  - 'company'   (string) Pre-selected company code (admin only, optional).
+ *  - 'is_admin'             (bool)   Whether the user is an admin operator.
+ *  - 'companies'            (array)  code => name pairs for the company dropdown (admin only).
+ *  - 'auto_enrol_companies' (array)  List of company codes with auto-enrolment.
+ *  - 'company_code'         (string) Company code for HR users (non-admin).
  */
 class insert_user_form extends \moodleform {
 
@@ -45,8 +46,10 @@ class insert_user_form extends \moodleform {
         $mform = $this->_form;
         $customdata = $this->_customdata;
 
-        $isadmin   = !empty($customdata['is_admin']);
-        $companies = $customdata['companies'] ?? [];
+        $isadmin            = !empty($customdata['is_admin']);
+        $companies          = $customdata['companies'] ?? [];
+        $autoenrolcodes     = $customdata['auto_enrol_companies'] ?? [];
+        $hrcompanycode      = $customdata['company_code'] ?? '';
 
         // Admin users: company selector.
         if ($isadmin) {
@@ -57,13 +60,7 @@ class insert_user_form extends \moodleform {
             $mform->addElement('select', 'company_code',
                 get_string('company_label', 'local_euronics_preinserimento'),
                 $options);
-            $mform->addRule('company_code',
-                get_string('error_company_required', 'local_euronics_preinserimento'),
-                'required', null, 'client');
-            // Disallow the empty placeholder.
-            $mform->addRule('company_code',
-                get_string('error_company_required', 'local_euronics_preinserimento'),
-                'nonzero', null, 'client');
+            $mform->setType('company_code', PARAM_ALPHANUMEXT);
         }
 
         // Section: personal data.
@@ -106,10 +103,36 @@ class insert_user_form extends \moodleform {
             get_string('course_sic_agg', 'local_euronics_preinserimento'),
             get_string('course_sic_agg_help', 'local_euronics_preinserimento'));
 
-        $mform->addElement('static', 'sic_gen_info', '',
-            '<div class="euronics-badge-info">' .
-            get_string('course_sic_gen_info', 'local_euronics_preinserimento') .
-            '</div>');
+        // Sicurezza Generale info: conditional on company auto-enrolment.
+        if ($isadmin) {
+            // For admin users: add hidden div, toggled via JS based on company dropdown.
+            $autoenroljson = json_encode($autoenrolcodes);
+            $html = '<div id="euronics-sic-gen-info" class="euronics-badge-info" style="display:none;">'
+                . get_string('course_sic_gen_info', 'local_euronics_preinserimento')
+                . '</div>'
+                . '<script>'
+                . '(function() {'
+                . '  var codes = ' . $autoenroljson . ';'
+                . '  var sel = document.getElementById("id_company_code");'
+                . '  var info = document.getElementById("euronics-sic-gen-info");'
+                . '  if (!sel || !info) return;'
+                . '  function toggle() {'
+                . '    info.style.display = codes.indexOf(sel.value) !== -1 ? "block" : "none";'
+                . '  }'
+                . '  sel.addEventListener("change", toggle);'
+                . '  toggle();'
+                . '})();'
+                . '</script>';
+            $mform->addElement('static', 'sic_gen_info', '', $html);
+        } else {
+            // For HR users: show only if their company has auto-enrolment.
+            if (in_array($hrcompanycode, $autoenrolcodes, true)) {
+                $mform->addElement('static', 'sic_gen_info', '',
+                    '<div class="euronics-badge-info">' .
+                    get_string('course_sic_gen_info', 'local_euronics_preinserimento') .
+                    '</div>');
+            }
+        }
 
         // Submit button.
         $mform->addElement('submit', 'submitbutton',
