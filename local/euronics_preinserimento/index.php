@@ -66,8 +66,10 @@ if ($isadmin) {
 
 // Build form with custom data.
 $formcustomdata = [
-    'is_admin'  => $isadmin,
-    'companies' => $companies,
+    'is_admin'             => $isadmin,
+    'companies'            => $companies,
+    'auto_enrol_companies' => local_euronics_preinserimento_get_auto_enrol_companies(),
+    'company_code'         => $isadmin ? '' : $company['code'],
 ];
 $form = new \local_euronics_preinserimento\form\insert_user_form(null, $formcustomdata);
 

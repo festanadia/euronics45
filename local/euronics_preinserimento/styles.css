@@ -32,9 +32,30 @@
 }
 
 /* Euronics primary button: blue with uppercase. */
-.btn-euronics,
-.btn-euronics:link,
-.btn-euronics:visited {
+a.btn-euronics,
+a.btn-euronics:link,
+a.btn-euronics:visited {
+    background-color: #0050d8;
+    border-color: #0050d8;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+}
+
+a.btn-euronics:hover,
+a.btn-euronics:focus {
+    background-color: #003c9e;
+    border-color: #003c9e;
+    color: #fff;
+}
+
+/* Style the form submit button. */
+#id_submitbutton {
     background-color: #0050d8;
     border-color: #0050d8;
     color: #fff;
@@ -43,8 +64,8 @@
     text-transform: uppercase;
 }
 
-.btn-euronics:hover,
-.btn-euronics:focus {
+#id_submitbutton:hover,
+#id_submitbutton:focus {
     background-color: #003c9e;
     border-color: #003c9e;
     color: #fff;

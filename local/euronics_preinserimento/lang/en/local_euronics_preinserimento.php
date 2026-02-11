@@ -45,7 +45,7 @@ $string['course_sic_spec'] = 'Specific Safety';
 $string['course_sic_spec_help'] = 'Select if the user must attend the specific safety course.';
 $string['course_sic_agg'] = 'Safety Refresher';
 $string['course_sic_agg_help'] = 'Select if the user must attend the safety refresher course.';
-$string['course_sic_gen_info'] = 'The user will be automatically enrolled in <strong>General Safety</strong>, if required for the company.';
+$string['course_sic_gen_info'] = 'The user will be automatically enrolled in <strong>General Safety</strong>';
 $string['submit'] = 'Submit';
 
 // Validation.
