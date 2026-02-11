@@ -136,8 +136,7 @@ class insert_user_form extends \moodleform {
 
         // Submit button.
         $mform->addElement('submit', 'submitbutton',
-            get_string('submit', 'local_euronics_preinserimento'),
-            ['class' => 'btn-euronics']);
+            get_string('submit', 'local_euronics_preinserimento'));
     }
 
     /**
