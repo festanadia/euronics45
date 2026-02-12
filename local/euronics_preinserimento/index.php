@@ -254,6 +254,20 @@ function local_euronics_preinserimento_create_user(stdClass $data, array $compan
 
     $DB->insert_record('user', $moodleuser);
 
+    // 3) INSERT into mdl_auth_oauth2_linked_login for users missing a linked login record.
+    $sql3 = "INSERT INTO {auth_oauth2_linked_login}
+                    (timecreated, timemodified, usermodified, userid, issuerid,
+                     username, email, confirmtoken, confirmtokenexpires)
+             SELECT :now1, :now2, u.id, u.id, 1,
+                    u.username, u.email, '', 0
+               FROM {user} u
+              WHERE u.id > 1
+                    AND u.id NOT IN (SELECT oll.userid FROM {auth_oauth2_linked_login} oll)";
+    $DB->execute($sql3, [
+        'now1' => time(),
+        'now2' => time(),
+    ]);
+
     $result = new stdClass();
     $result->username = $usernameLower;
     return $result;
