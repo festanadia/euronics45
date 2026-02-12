@@ -60,7 +60,7 @@ $string['error_username_exists'] = 'Esiste già un utente con questa combinazion
 $string['success_title'] = 'Utente creato con successo';
 $string['success_message'] = 'L\'utente <strong>{$a->fullname}</strong> è stato creato correttamente.<br>Username assegnata: <strong>{$a->username}</strong>';
 $string['success_reminder_file'] = 'Ricorda di inserire l\'utente anche nel file di anagrafiche ordinario, per evitare che l\'account venga disattivato alla successiva elaborazione del file.';
-$string['success_reminder_schedule'] = 'L\'elaborazione dei dati inseriti avverrà alle <strong>14:00</strong> e alle <strong>20:00</strong>: solo dopo questi orari i nuovi utenti potranno effettuare l\'accesso in piattaforma.';
+$string['success_reminder_schedule'] = 'L\'elaborazione dei dati inseriti avverrà alle <strong>{$a->time1}</strong> e alle <strong>{$a->time2}</strong>: solo dopo questi orari i nuovi utenti potranno effettuare l\'accesso in piattaforma.';
 $string['success_enrolled_courses'] = 'L\'utente è stato iscritto ai seguenti corsi: {$a}';
 $string['success_insert_another'] = 'Inserisci un altro utente';
 

@@ -60,7 +60,7 @@ $string['error_username_exists'] = 'A user with this first name and last name co
 $string['success_title'] = 'User created successfully';
 $string['success_message'] = 'The user <strong>{$a->fullname}</strong> has been created successfully.<br>Assigned username: <strong>{$a->username}</strong>';
 $string['success_reminder_file'] = 'Remember to also add the user to the standard data file, to prevent the account from being deactivated during the next file processing.';
-$string['success_reminder_schedule'] = 'Data processing occurs at <strong>14:00</strong> and <strong>20:00</strong>: new users will be able to access the platform only after these times.';
+$string['success_reminder_schedule'] = 'Data processing occurs at <strong>{$a->time1}</strong> and <strong>{$a->time2}</strong>: new users will be able to access the platform only after these times.';
 $string['success_enrolled_courses'] = 'The user has been enrolled in the following courses: {$a}';
 $string['success_insert_another'] = 'Register another user';
 
