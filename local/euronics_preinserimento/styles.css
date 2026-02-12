@@ -70,3 +70,12 @@ a.btn-euronics:focus {
     border-color: #003c9e;
     color: #fff;
 }
+
+/* Transparent fieldset backgrounds for form sections. */
+fieldset#id_header_anagrafici {
+    background-color: transparent;
+}
+
+fieldset#id_header_corsi {
+    background-color: transparent;
+}

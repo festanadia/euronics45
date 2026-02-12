@@ -117,8 +117,18 @@ if ($data = $form->get_data()) {
         echo get_string('success_reminder_file', 'local_euronics_preinserimento');
         echo html_writer::end_div();
 
+        // Calculate cron times (12:00 and 17:00 UTC) in Europe/Rome timezone.
+        $tz = new DateTimeZone('Europe/Rome');
+        $cron1 = new DateTime('today 12:00', new DateTimeZone('UTC'));
+        $cron1->setTimezone($tz);
+        $cron2 = new DateTime('today 17:00', new DateTimeZone('UTC'));
+        $cron2->setTimezone($tz);
+        $scheduledata = new stdClass();
+        $scheduledata->time1 = $cron1->format('H:i');
+        $scheduledata->time2 = $cron2->format('H:i');
+
         echo html_writer::start_div('euronics-badge-info mb-3');
-        echo get_string('success_reminder_schedule', 'local_euronics_preinserimento');
+        echo get_string('success_reminder_schedule', 'local_euronics_preinserimento', $scheduledata);
         echo html_writer::end_div();
 
         // Link to insert another user (preserve company selection for admins).
