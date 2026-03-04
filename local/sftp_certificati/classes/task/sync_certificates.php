@@ -65,7 +65,21 @@ class sync_certificates extends \core\task\scheduled_task {
 
         mtrace('SFTP certificate sync — starting.');
 
-        // 1. Build company map: aziendasocia code → SFTP base path.
+        // 1. Register a PSR-4 autoloader for phpseclib3 from the bundled vendor directory.
+        $phpseclibpath = $CFG->dirroot . '/local/sftp_certificati/vendor/phpseclib/phpseclib';
+        if (is_dir($phpseclibpath) && !class_exists('\phpseclib3\Net\SFTP', false)) {
+            spl_autoload_register(function(string $class) use ($phpseclibpath): void {
+                if (strpos($class, 'phpseclib3\\') !== 0) {
+                    return;
+                }
+                $file = $phpseclibpath . '/' . str_replace('\\', '/', substr($class, 11)) . '.php';
+                if (file_exists($file)) {
+                    require_once($file);
+                }
+            });
+        }
+
+        // 2. Build company map: aziendasocia code → SFTP base path.
         $companymap = $this->build_company_map();
         if (empty($companymap)) {
             mtrace('No companies configured. Aborting.');
@@ -73,9 +87,9 @@ class sync_certificates extends \core\task\scheduled_task {
         }
         mtrace('Company map: ' . count($companymap) . ' code(s) configured.');
 
-        // 2. Verify phpseclib3 availability.
+        // 3. Verify phpseclib3 availability.
         if (!class_exists('\phpseclib3\Net\SFTP')) {
-            mtrace('phpseclib3 is not available. Cannot connect to SFTP. Aborting.');
+            mtrace('phpseclib3 is not available. Check that local/sftp_certificati/vendor/phpseclib/phpseclib/ exists. Aborting.');
             return;
         }
 

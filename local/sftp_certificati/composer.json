@@ -1,0 +1,11 @@
+{
+    "name": "euronics/local-sftp-certificati",
+    "description": "Moodle local plugin: SFTP certificate sync",
+    "type": "moodle-plugin",
+    "require": {
+        "phpseclib/phpseclib": "^3.0"
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}
