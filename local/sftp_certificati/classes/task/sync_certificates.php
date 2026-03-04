@@ -65,7 +65,13 @@ class sync_certificates extends \core\task\scheduled_task {
 
         mtrace('SFTP certificate sync — starting.');
 
-        // 1. Build company map: aziendasocia code → SFTP base path.
+        // 1. Load phpseclib3 from the plugin's own vendor directory (installed via composer).
+        $autoloader = $CFG->dirroot . '/local/sftp_certificati/vendor/autoload.php';
+        if (file_exists($autoloader)) {
+            require_once($autoloader);
+        }
+
+        // 2. Build company map: aziendasocia code → SFTP base path.
         $companymap = $this->build_company_map();
         if (empty($companymap)) {
             mtrace('No companies configured. Aborting.');
@@ -73,9 +79,9 @@ class sync_certificates extends \core\task\scheduled_task {
         }
         mtrace('Company map: ' . count($companymap) . ' code(s) configured.');
 
-        // 2. Verify phpseclib3 availability.
+        // 3. Verify phpseclib3 availability.
         if (!class_exists('\phpseclib3\Net\SFTP')) {
-            mtrace('phpseclib3 is not available. Cannot connect to SFTP. Aborting.');
+            mtrace('phpseclib3 is not available. Run "composer install" inside local/sftp_certificati/. Aborting.');
             return;
         }
 
