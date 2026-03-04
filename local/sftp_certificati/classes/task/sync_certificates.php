@@ -303,7 +303,7 @@ class sync_certificates extends \core\task\scheduled_task {
         global $DB;
 
         try {
-            $sql = "SELECT id, aziendasocia, utente, visualizzacertificato
+            $sql = "SELECT aziendasocia, utente, visualizzacertificato
                       FROM {{$table}}";
             $records = $DB->get_records_sql($sql);
         } catch (\Exception $e) {
@@ -350,26 +350,26 @@ class sync_certificates extends \core\task\scheduled_task {
 
         // 1. Resolve company → SFTP base path.
         if (!isset($companymap[$aziendasocia])) {
-            mtrace("    [SKIP] id={$record->id}: unknown aziendasocia '{$aziendasocia}'.");
+            mtrace("    [SKIP] utente={$utente}: unknown aziendasocia '{$aziendasocia}'.");
             return 'errors';
         }
         $basepath = $companymap[$aziendasocia];
 
         // 2. Look up user's fiscal code.
         if (empty($utente)) {
-            mtrace("    [SKIP] id={$record->id}: empty utente field.");
+            mtrace("    [SKIP] utente={$utente}: empty utente field.");
             return 'errors';
         }
 
         $user = $DB->get_record('user', ['username' => strtolower($utente)], 'id, username, idnumber');
         if (!$user) {
-            mtrace("    [SKIP] id={$record->id}: user '{$utente}' not found in mdl_user.");
+            mtrace("    [SKIP] utente={$utente}: user '{$utente}' not found in mdl_user.");
             return 'errors';
         }
 
         $codicefiscale = strtoupper(trim($user->idnumber ?? ''));
         if (empty($codicefiscale)) {
-            mtrace("    [SKIP] id={$record->id}: user '{$utente}' has no idnumber (codice fiscale).");
+            mtrace("    [SKIP] utente={$utente}: user '{$utente}' has no idnumber (codice fiscale).");
             return 'errors';
         }
 
@@ -389,7 +389,7 @@ class sync_certificates extends \core\task\scheduled_task {
         // 6. Extract URL from the HTML link.
         $url = $this->extract_certificate_url($certhtml);
         if (empty($url)) {
-            mtrace("    [SKIP] id={$record->id}: could not parse certificate URL.");
+            mtrace("    [SKIP] utente={$utente}: could not parse certificate URL.");
             return 'errors';
         }
 
@@ -401,7 +401,7 @@ class sync_certificates extends \core\task\scheduled_task {
         // 7. Download the certificate PDF.
         $pdfcontent = $this->download_certificate($curl, $url);
         if ($pdfcontent === null) {
-            mtrace("    [SKIP] id={$record->id}: failed to download PDF from {$url}.");
+            mtrace("    [SKIP] utente={$utente}: failed to download PDF from {$url}.");
             return 'errors';
         }
 
@@ -409,7 +409,7 @@ class sync_certificates extends \core\task\scheduled_task {
         $this->ensure_remote_directory($sftp, $remotedir);
 
         if (!$sftp->put($remotepath, $pdfcontent)) {
-            mtrace("    [ERROR] id={$record->id}: SFTP put failed for {$remotepath}.");
+            mtrace("    [ERROR] utente={$utente}: SFTP put failed for {$remotepath}.");
             return 'errors';
         }
 
