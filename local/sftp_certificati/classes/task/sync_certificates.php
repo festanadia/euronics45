@@ -65,10 +65,18 @@ class sync_certificates extends \core\task\scheduled_task {
 
         mtrace('SFTP certificate sync — starting.');
 
-        // 1. Load phpseclib3 from the plugin's own vendor directory (installed via composer).
-        $autoloader = $CFG->dirroot . '/local/sftp_certificati/vendor/autoload.php';
-        if (file_exists($autoloader)) {
-            require_once($autoloader);
+        // 1. Register a PSR-4 autoloader for phpseclib3 from the bundled vendor directory.
+        $phpseclibpath = $CFG->dirroot . '/local/sftp_certificati/vendor/phpseclib/phpseclib';
+        if (is_dir($phpseclibpath) && !class_exists('\phpseclib3\Net\SFTP', false)) {
+            spl_autoload_register(function(string $class) use ($phpseclibpath): void {
+                if (strpos($class, 'phpseclib3\\') !== 0) {
+                    return;
+                }
+                $file = $phpseclibpath . '/' . str_replace('\\', '/', substr($class, 11)) . '.php';
+                if (file_exists($file)) {
+                    require_once($file);
+                }
+            });
         }
 
         // 2. Build company map: aziendasocia code → SFTP base path.
@@ -81,7 +89,7 @@ class sync_certificates extends \core\task\scheduled_task {
 
         // 3. Verify phpseclib3 availability.
         if (!class_exists('\phpseclib3\Net\SFTP')) {
-            mtrace('phpseclib3 is not available. Run "composer install" inside local/sftp_certificati/. Aborting.');
+            mtrace('phpseclib3 is not available. Check that local/sftp_certificati/vendor/phpseclib/phpseclib/ exists. Aborting.');
             return;
         }
 
