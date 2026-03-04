@@ -224,6 +224,8 @@ class sync_certificates extends \core\task\scheduled_task {
     protected function authenticate_moodle(): ?\curl {
         global $CFG;
 
+        require_once($CFG->libdir . '/filelib.php');
+
         $username = get_config('local_sftp_certificati', 'moodle_auth_user');
         $password = get_config('local_sftp_certificati', 'moodle_auth_pass');
 
