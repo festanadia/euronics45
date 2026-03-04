@@ -305,24 +305,28 @@ class sync_certificates extends \core\task\scheduled_task {
         try {
             $sql = "SELECT aziendasocia, utente, visualizzacertificato
                       FROM {{$table}}";
-            $records = $DB->get_records_sql($sql);
+            $rs = $DB->get_recordset_sql($sql);
         } catch (\Exception $e) {
             mtrace("  ERROR querying {$table}: " . $e->getMessage());
             return;
         }
 
-        if (empty($records)) {
+        if (!$rs->valid()) {
+            $rs->close();
             mtrace("  No records in {$table}.");
             return;
         }
 
-        mtrace('  ' . count($records) . ' record(s) found.');
-
-        foreach ($records as $record) {
+        $count = 0;
+        foreach ($rs as $record) {
+            $count++;
             $stats['processed']++;
             $result = $this->process_record($record, $subfolder, $companymap, $sftp, $curl);
             $stats[$result]++;
         }
+        $rs->close();
+
+        mtrace("  {$count} record(s) processed from {$table}.");
     }
 
     /**
