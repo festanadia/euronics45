@@ -60,6 +60,11 @@ if ($hassiteconfig) {
         get_string('sftp_keypassphrase_desc', 'local_sftp_certificati'),
         ''));
 
+    $settings->add(new admin_setting_configtext('local_sftp_certificati/sftp_timeout',
+        get_string('sftp_timeout', 'local_sftp_certificati'),
+        get_string('sftp_timeout_desc', 'local_sftp_certificati'),
+        '30', PARAM_INT));
+
     // -------------------------------------------------------------------------
     // Moodle authentication (for certificate PDF downloads).
     // -------------------------------------------------------------------------

@@ -176,6 +176,7 @@ class sync_certificates extends \core\task\scheduled_task {
         $username   = get_config('local_sftp_certificati', 'sftp_username');
         $keyfile    = get_config('local_sftp_certificati', 'sftp_keyfile');
         $passphrase = get_config('local_sftp_certificati', 'sftp_keypassphrase');
+        $timeout    = (int) get_config('local_sftp_certificati', 'sftp_timeout') ?: 30;
 
         if (empty($host) || empty($username) || empty($keyfile)) {
             mtrace('SFTP connection settings incomplete (host/username/keyfile). Aborting.');
@@ -195,7 +196,7 @@ class sync_certificates extends \core\task\scheduled_task {
                 $passphrase !== '' ? $passphrase : false
             );
 
-            $sftp = new \phpseclib3\Net\SFTP($host, $port);
+            $sftp = new \phpseclib3\Net\SFTP($host, $port, $timeout);
             if (!$sftp->login($username, $key)) {
                 mtrace('SFTP authentication failed (login returned false).');
                 return null;

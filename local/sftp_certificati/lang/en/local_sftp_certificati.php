@@ -42,6 +42,8 @@ $string['sftp_keyfile']           = 'PPK Key File';
 $string['sftp_keyfile_desc']      = 'Filename of the .ppk private key. The file must be placed in the plugin\'s <code>keys/</code> directory (<code>local/sftp_certificati/keys/</code>).';
 $string['sftp_keypassphrase']     = 'Key Passphrase';
 $string['sftp_keypassphrase_desc'] = 'Passphrase for the PPK key file. Leave empty if the key has no passphrase.';
+$string['sftp_timeout']           = 'SFTP connection timeout (seconds)';
+$string['sftp_timeout_desc']      = 'Number of seconds to wait for the SFTP connection and authentication before returning a timeout error (default: 30).';
 
 // Moodle authentication settings.
 $string['auth_heading']           = 'Moodle Authentication';
